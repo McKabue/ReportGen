@@ -31,29 +31,7 @@ namespace ReportGen
 
 
 
-        [Cached()]
-        public string employeeXMLPartID = string.Empty;
-        private Office.CustomXMLPart employeeXMLPart;
-        private const string prefix = "xmlns:ns='http://schemas.microsoft.com/vsto/samples'";
-
-        private string GetXmlFromResource()
-        {
-            System.Reflection.Assembly asm =
-                System.Reflection.Assembly.GetExecutingAssembly();
-            System.IO.Stream stream1 = asm.GetManifestResourceStream(
-                "EmployeeControls.employees.xml");
-
-            using (System.IO.StreamReader resourceReader =
-                    new System.IO.StreamReader(stream1))
-            {
-                if (resourceReader != null)
-                {
-                    return resourceReader.ReadToEnd();
-                }
-            }
-
-            return null;
-        }
+        
 
 
 
@@ -64,24 +42,6 @@ namespace ReportGen
             var MySqlInitializer = new MySqlInitializer();
             MySqlInitializer.InitializeDatabase(_context);
 
-            //Document vstoDocument = Globals.Factory.GetVstoObject(Globals.ThisAddIn.Application.ActiveDocument);
-            //string name = "MyRichTextBoxControl";
-            //Word.ContentControl richTextBox = null;
-
-            //try
-            //{
-            //    richTextBox = vstoDocument.ContentControls.get_Item(name);
-            //}
-            //catch (System.Runtime.InteropServices.COMException ex)
-            //{
-            //        throw;
-            //}
-
-            //foreach (Word.Window wnd in Application.Windows)
-            //{
-            //    Application_WindowActivate(wnd.Document, wnd);
-            //}
-            //Application.WindowActivate += Application_WindowActivate;
 
             _userControlTaskPane = new UserControlTaskPane();
             myCustomTaskPane = this.CustomTaskPanes.Add(_userControlTaskPane, "ReportGen");
@@ -95,6 +55,12 @@ namespace ReportGen
             this.Application.DocumentChange += new Word.ApplicationEvents4_DocumentChangeEventHandler(documentChangeEvent);
             //this.Application.DocumentOpen += new Word.ApplicationEvents4_DocumentOpenEventHandler(documentOpenEvent);
         }
+
+        //public void documentOpenEvent(Word.Document doc)
+        //{
+        //    doc.Paragraphs[1].Range.InsertParagraphBefore();
+        //    doc.Paragraphs[1].Range.Text = "This text was added by using code.";
+        //}
 
         public void documentChangeEvent()
         {
