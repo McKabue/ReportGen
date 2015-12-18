@@ -36,6 +36,7 @@
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.AutoGenerate = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             bookMarkTypeLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -109,10 +110,21 @@
             this.AutoGenerate.UseVisualStyleBackColor = true;
             this.AutoGenerate.Click += new System.EventHandler(this.AutoGenerate_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(239, 293);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 16;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // UserControlTaskPane
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.AutoGenerate);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.richTextBox1);
@@ -137,5 +149,6 @@
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button AutoGenerate;
+        private System.Windows.Forms.Button button1;
     }
 }

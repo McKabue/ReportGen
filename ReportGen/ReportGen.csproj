@@ -228,6 +228,7 @@
     <Compile Include="Tools\Models\BookMarkType.cs" />
     <Compile Include="Tools\Repositories\BaseRepository.cs" />
     <Compile Include="Tools\Interfaces\IBaseRepository.cs" />
+    <Compile Include="Tools\WindowInplementation.cs" />
     <Compile Include="Tools\XMLCustomParts.cs" />
     <Compile Include="UserControlTaskPane.cs">
       <SubType>UserControl</SubType>

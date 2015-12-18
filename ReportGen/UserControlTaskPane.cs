@@ -58,6 +58,16 @@ namespace ReportGen
             _extentions.CreateTemplatedDocuments(Globals.ThisAddIn.Application.ActiveDocument, data);
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //Word.Dialog dlg = Globals.ThisAddIn.Application.Dialogs[Word.WdWordDialog.wdDialogInsertPicture];
+            // //dlg.Application.
+            // dlg.Show();
+
+            ControlForm form = new ControlForm();
+            form.Show(new WindowInplementation(new IntPtr(Globals.ThisAddIn.Application.Windows[1].Hwnd)));
+        }
+
 
 
         //private void makeEditable_Click(object sender, EventArgs e)

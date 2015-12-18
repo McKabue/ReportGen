@@ -30,3 +30,4 @@ E:\ReportGen\ReportGen\obj\Debug\ReportGen.UserControlTaskPane.resources
 E:\ReportGen\ReportGen\obj\Debug\ReportGen.csproj.GenerateResource.Cache
 E:\ReportGen\ReportGen\obj\Debug\ReportGen.dll
 E:\ReportGen\ReportGen\obj\Debug\ReportGen.pdb
+E:\ReportGen\ReportGen\obj\Debug\ReportGen.csprojResolveAssemblyReference.cache

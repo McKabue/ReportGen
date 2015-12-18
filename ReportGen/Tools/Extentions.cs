@@ -84,7 +84,7 @@ namespace ReportGen.Tools
 
         private Word.Document ApplyData(Word.Document doc, string i)
         {
-            //var data = _unitOfWork.BookMarkRepository.FindBy(id => id.BookMarkID == i);
+            
             
             //if (doc.Bookmarks.Exists("maintitle"))
             //{
@@ -98,6 +98,8 @@ namespace ReportGen.Tools
 
             foreach(var bm in doc.Bookmarks)
             {
+                //var data = _unitOfWork.BookMarkRepository.FindBy(id => id.BookMarkID == i);
+
                 var range = doc.Bookmarks[bm].Range;
                 doc.Bookmarks[bm].Delete();
                 range.Text = i;
