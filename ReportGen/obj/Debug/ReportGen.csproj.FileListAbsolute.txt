@@ -26,8 +26,10 @@ E:\ReportGen\ReportGen\bin\Debug\Microsoft.Office.Tools.Word.xml
 E:\ReportGen\ReportGen\bin\Debug\Microsoft.Office.Tools.Common.v4.0.Utilities.xml
 E:\ReportGen\ReportGen\obj\Debug\ReportGen.ControlForm.resources
 E:\ReportGen\ReportGen\obj\Debug\ReportGen.Properties.Resources.resources
+E:\ReportGen\ReportGen\obj\Debug\ReportGen.SaveTemplateForm.resources
 E:\ReportGen\ReportGen\obj\Debug\ReportGen.UserControlTaskPane.resources
 E:\ReportGen\ReportGen\obj\Debug\ReportGen.csproj.GenerateResource.Cache
 E:\ReportGen\ReportGen\obj\Debug\ReportGen.dll
 E:\ReportGen\ReportGen\obj\Debug\ReportGen.pdb
 E:\ReportGen\ReportGen\obj\Debug\ReportGen.csprojResolveAssemblyReference.cache
+E:\ReportGen\ReportGen\obj\Debug\ReportGen.BookmarkDataPopup.resources

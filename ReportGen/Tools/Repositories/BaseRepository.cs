@@ -39,32 +39,32 @@ namespace ReportGen.Tools.Repositories
             return _ctx.Set<T>().Where(searchBy).ToList();
         }
 
-        //public virtual async Task<List<T>> SearchBy(Expression<Func<T, bool>> searchBy, string includeProperties)
-        //{
+        public virtual List<T> SearchBy(Expression<Func<T, bool>> searchBy, string includeProperties)
+        {
 
-        //    IQueryable<T> result = _ctx.Set<T>().Where(searchBy);
-        //    if (result.Any())
-        //    {
-        //        foreach (var property in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
-        //        {
-        //            result = result.Include(property);
-        //        }
-        //    }
-        //    return await result.ToListAsync();
-        //}
+            IQueryable<T> result = _ctx.Set<T>().Where(searchBy);
+            if (result.Any())
+            {
+                foreach (var property in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    result = result.Include(property);
+                }
+            }
+            return result.ToList();
+        }
 
-        //public virtual async Task<T> FindBy(Expression<Func<T, bool>> findBy, string includeProperties)
-        //{
-        //    IQueryable<T> result = _ctx.Set<T>().Where(findBy);
-        //    if (result.Any())
-        //    {
-        //        foreach (var property in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
-        //        {
-        //            result = result.Include(property);
-        //        }
-        //    }
-        //    return await result.FirstOrDefaultAsync();
-        //}
+        public virtual T FindBy(Expression<Func<T, bool>> findBy, string includeProperties)
+        {
+            IQueryable<T> result = _ctx.Set<T>().Where(findBy);
+            if (result.Any())
+            {
+                foreach (var property in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    result = result.Include(property);
+                }
+            }
+            return result.FirstOrDefault();
+        }
 
         public virtual T FindBy(Expression<Func<T, bool>> findBy)
         {

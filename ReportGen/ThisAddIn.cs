@@ -8,6 +8,7 @@ using Office = Microsoft.Office.Core;
 using Microsoft.Office.Tools.Word;
 using ReportGen.Tools.DAL;
 using Microsoft.VisualStudio.Tools.Applications.Runtime;
+using ReportGen.Tools;
 
 namespace ReportGen
 {
@@ -22,7 +23,7 @@ namespace ReportGen
                 return myCustomTaskPane;
             }
         }
-
+        private Methods _methods = new Methods();
         
         private RichTextContentControl richTextControl = null;
 
@@ -56,6 +57,8 @@ namespace ReportGen
             //this.Application.DocumentOpen += new Word.ApplicationEvents4_DocumentOpenEventHandler(documentOpenEvent);
         }
 
+        
+
         //public void documentOpenEvent(Word.Document doc)
         //{
         //    doc.Paragraphs[1].Range.InsertParagraphBefore();
@@ -67,8 +70,15 @@ namespace ReportGen
             
             var vstoDocument = Globals.Factory.GetVstoObject(Globals.ThisAddIn.Application.ActiveDocument);
             vstoDocument.SelectionChange += new Microsoft.Office.Tools.Word.SelectionEventHandler(UserControlTaskPane.ThisDocument_SelectionChange);
+
+            //foreach (Word.Bookmark bk in Globals.ThisAddIn.Application.Selection.Bookmarks)
+            //{
+            //    vstoDocument.Bookmarks[bk].Delete();
+            //}
         }
 
+
+        
         //void documentChangeEvent()
         //{
         //    this.Application.ActiveDocument.ContentControlOnEnter += new Word.DocumentEvents2_ContentControlOnEnterEventHandler(ShowTaskPane);
@@ -83,7 +93,7 @@ namespace ReportGen
 
         //}
 
-        
+
 
         private void ThisAddIn_Shutdown(object sender, System.EventArgs e)
         {

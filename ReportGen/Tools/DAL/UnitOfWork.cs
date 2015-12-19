@@ -12,7 +12,9 @@ namespace ReportGen.Tools.DAL
     {
         private readonly DatabaseContext context;
         private IBaseRepository<BookMark> bookMarkRepository;
-        private IBaseRepository<BookMarkType> bookMarkTypeRepository { get; set; }
+        private IBaseRepository<BookMarkType> bookMarkTypeRepository;
+        private IBaseRepository<AutoDocument> autoDocumentRepository;
+        private IBaseRepository<Template> templateRepository;
 
         public UnitOfWork()
         {
@@ -48,7 +50,33 @@ namespace ReportGen.Tools.DAL
             }
         }
 
-       
+        public IBaseRepository<AutoDocument> AutoDocumentRepository
+        {
+            get
+            {
+
+                if (this.autoDocumentRepository == null)
+                {
+                    this.autoDocumentRepository = new BaseRepository<AutoDocument>(context);
+                }
+                return autoDocumentRepository;
+            }
+        }
+
+        public IBaseRepository<Template> TemplateRepository
+        {
+            get
+            {
+
+                if (this.templateRepository == null)
+                {
+                    this.templateRepository = new BaseRepository<Template>(context);
+                }
+                return templateRepository;
+            }
+        }
+
+
 
         public int Save()
         {

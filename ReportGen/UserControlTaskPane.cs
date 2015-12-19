@@ -15,7 +15,7 @@ namespace ReportGen
 {
     public partial class UserControlTaskPane : UserControl
     {
-        private Extentions _extentions = new Extentions();
+        private Methods _extentions = new Methods();
         private UnitOfWork _unitOfWork = new UnitOfWork();
         public UserControlTaskPane()
         {
@@ -48,8 +48,10 @@ namespace ReportGen
         //https://msdn.microsoft.com/en-us/library/microsoft.office.tools.word.document.selectionchange.aspx
         public static void ThisDocument_SelectionChange(object sender, Microsoft.Office.Tools.Word.SelectionEventArgs e)
         {
-           Globals.ThisAddIn._userControlTaskPane.richTextBox1.Text = e.Selection.Text; 
-     
+           Globals.ThisAddIn._userControlTaskPane.richTextBox1.Text = e.Selection.Text;
+
+            Methods _methods = new Methods();
+            _methods.IsBookmark();
         }
 
         private void AutoGenerate_Click(object sender, EventArgs e)
@@ -58,15 +60,18 @@ namespace ReportGen
             _extentions.CreateTemplatedDocuments(Globals.ThisAddIn.Application.ActiveDocument, data);
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            //Word.Dialog dlg = Globals.ThisAddIn.Application.Dialogs[Word.WdWordDialog.wdDialogInsertPicture];
-            // //dlg.Application.
-            // dlg.Show();
+        //private void button1_Click(object sender, EventArgs e)
+        //{
+        //    //Word.Dialog dlg = Globals.ThisAddIn.Application.Dialogs[Word.WdWordDialog.wdDialogInsertPicture];
+        //    // //dlg.Application.
+        //    // dlg.Show();
 
-            ControlForm form = new ControlForm();
-            form.Show(new WindowInplementation(new IntPtr(Globals.ThisAddIn.Application.Windows[1].Hwnd)));
-        }
+        //    ControlForm form = new ControlForm();
+        //    form.Show(new WindowInplementation(new IntPtr(Globals.ThisAddIn.Application.Windows[1].Hwnd)));
+        //}
+
+        
+
 
 
 

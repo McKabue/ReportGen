@@ -13,10 +13,22 @@ namespace ReportGen.Tools.DAL
         {
             Database.SetInitializer(new MySqlInitializer());
         }
-
-
+        
         public DatabaseContext() : base("ReportGenConnection") { }
 
+
+
+
+        public virtual DbSet<Template> Templates { get; set; }
+
+        public virtual DbSet<AutoDocument> AutoDocuments { get; set; }
+
+        public virtual DbSet<BookMarkData> BookMarkDatas { get; set; }
+
         public virtual DbSet<BookMark> BookMarks { get; set; }
+
+        public virtual DbSet<BookMarkType> BookMarkTypes { get; set; }
+
+        
     }
 }
