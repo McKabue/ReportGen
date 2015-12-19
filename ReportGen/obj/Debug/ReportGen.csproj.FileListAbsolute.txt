@@ -33,3 +33,7 @@ E:\ReportGen\ReportGen\obj\Debug\ReportGen.dll
 E:\ReportGen\ReportGen\obj\Debug\ReportGen.pdb
 E:\ReportGen\ReportGen\obj\Debug\ReportGen.csprojResolveAssemblyReference.cache
 E:\ReportGen\ReportGen\obj\Debug\ReportGen.BookmarkDataPopup.resources
+E:\ReportGen\ReportGen\bin\Debug\System.Data.SQLite.dll
+E:\ReportGen\ReportGen\bin\Debug\System.Data.SQLite.EF6.dll
+E:\ReportGen\ReportGen\bin\Debug\System.Data.SQLite.Linq.dll
+E:\ReportGen\ReportGen\bin\Debug\System.Data.SQLite.xml
