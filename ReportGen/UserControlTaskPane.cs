@@ -56,7 +56,7 @@ namespace ReportGen
 
         private void AutoGenerate_Click(object sender, EventArgs e)
         {
-            var data = _unitOfWork.BookMarkRepository.GetAll().Select(b => b.BookMarkID).ToList();
+            var data = _unitOfWork.AutoDocumentRepository.GetAll().ToList();
             _extentions.CreateTemplatedDocuments(Globals.ThisAddIn.Application.ActiveDocument, data);
         }
 

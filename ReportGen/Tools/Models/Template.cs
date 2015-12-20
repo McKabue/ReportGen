@@ -14,7 +14,7 @@ namespace ReportGen.Tools.Models
 
         public string Name { get; set; }
 
-        public decimal Number { get; set; }
+        public int Number { get; set; }
 
         public string Path { get; set; }
         

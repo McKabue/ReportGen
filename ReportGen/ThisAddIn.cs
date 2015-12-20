@@ -24,8 +24,6 @@ namespace ReportGen
             }
         }
         private Methods _methods = new Methods();
-        
-        private RichTextContentControl richTextControl = null;
 
         public Microsoft.Office.Tools.Word.Controls.CheckBox ToggleControl = new Microsoft.Office.Tools.Word.Controls.CheckBox();
 
@@ -42,6 +40,9 @@ namespace ReportGen
             var _context = new DatabaseContext();
             var MySqlInitializer = new MySqlInitializer();
             MySqlInitializer.InitializeDatabase(_context);
+            //var _context = new DatabaseContext();
+            //var SQLITEInitializer = new SQLITEInitializer();
+            //SQLITEInitializer.InitializeDatabase(_context);
 
 
             _userControlTaskPane = new UserControlTaskPane();

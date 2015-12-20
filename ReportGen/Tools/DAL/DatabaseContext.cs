@@ -13,7 +13,7 @@ namespace ReportGen.Tools.DAL
         {
             Database.SetInitializer(new MySqlInitializer());
         }
-        
+
         public DatabaseContext() : base("ReportGenConnection") { }
 
 
@@ -29,6 +29,31 @@ namespace ReportGen.Tools.DAL
 
         public virtual DbSet<BookMarkType> BookMarkTypes { get; set; }
 
-        
+
     }
+
+    //public class DatabaseContext : DbContext
+    //{
+    //    static DatabaseContext()
+    //    {
+    //        Database.SetInitializer(new SQLITEInitializer());
+    //    }
+
+    //    public DatabaseContext() : base("ReportGenConnectionSQLITE") { }
+
+
+
+
+    //    public virtual DbSet<Template> Templates { get; set; }
+
+    //    public virtual DbSet<AutoDocument> AutoDocuments { get; set; }
+
+    //    public virtual DbSet<BookMarkData> BookMarkDatas { get; set; }
+
+    //    public virtual DbSet<BookMark> BookMarks { get; set; }
+
+    //    public virtual DbSet<BookMarkType> BookMarkTypes { get; set; }
+
+
+    //}
 }

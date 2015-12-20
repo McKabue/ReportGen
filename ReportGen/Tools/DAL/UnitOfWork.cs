@@ -15,6 +15,7 @@ namespace ReportGen.Tools.DAL
         private IBaseRepository<BookMarkType> bookMarkTypeRepository;
         private IBaseRepository<AutoDocument> autoDocumentRepository;
         private IBaseRepository<Template> templateRepository;
+        private IBaseRepository<BookMarkData> bookMarkDataRepository;
 
         public UnitOfWork()
         {
@@ -77,6 +78,18 @@ namespace ReportGen.Tools.DAL
         }
 
 
+        public IBaseRepository<BookMarkData> BookMarkDataRepository
+        {
+            get
+            {
+
+                if (this.bookMarkDataRepository == null)
+                {
+                    this.bookMarkDataRepository = new BaseRepository<BookMarkData>(context);
+                }
+                return bookMarkDataRepository;
+            }
+        }
 
         public int Save()
         {
