@@ -4,10 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using Word = Microsoft.Office.Interop.Word;
-using ReportGen.Tools;
-using System.Windows.Forms;
 
 namespace ReportGen.Tools
 {

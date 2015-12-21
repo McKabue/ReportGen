@@ -1,13 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using Word = Microsoft.Office.Interop.Word;
-using ReportGen.Tools.Models;
 using ReportGen.Tools.DAL;
 using ReportGen.Tools;
 
