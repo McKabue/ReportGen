@@ -29,23 +29,23 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.Label bookMarkTypeLabel;
-            System.Windows.Forms.TreeNode treeNode21 = new System.Windows.Forms.TreeNode("Node1");
-            System.Windows.Forms.TreeNode treeNode22 = new System.Windows.Forms.TreeNode("Node4");
-            System.Windows.Forms.TreeNode treeNode23 = new System.Windows.Forms.TreeNode("Node5");
-            System.Windows.Forms.TreeNode treeNode24 = new System.Windows.Forms.TreeNode("Node2", new System.Windows.Forms.TreeNode[] {
-            treeNode22,
-            treeNode23});
-            System.Windows.Forms.TreeNode treeNode25 = new System.Windows.Forms.TreeNode("Node3");
-            System.Windows.Forms.TreeNode treeNode26 = new System.Windows.Forms.TreeNode("Node0", new System.Windows.Forms.TreeNode[] {
-            treeNode21,
-            treeNode24,
-            treeNode25});
-            System.Windows.Forms.TreeNode treeNode27 = new System.Windows.Forms.TreeNode("Node7");
-            System.Windows.Forms.TreeNode treeNode28 = new System.Windows.Forms.TreeNode("Node8");
-            System.Windows.Forms.TreeNode treeNode29 = new System.Windows.Forms.TreeNode("Node6", new System.Windows.Forms.TreeNode[] {
-            treeNode27,
-            treeNode28});
-            System.Windows.Forms.TreeNode treeNode30 = new System.Windows.Forms.TreeNode("Node9");
+            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Node1");
+            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Node4");
+            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("Node5");
+            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("Node2", new System.Windows.Forms.TreeNode[] {
+            treeNode12,
+            treeNode13});
+            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("Node3");
+            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("Node0", new System.Windows.Forms.TreeNode[] {
+            treeNode11,
+            treeNode14,
+            treeNode15});
+            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("Node7");
+            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("Node8");
+            System.Windows.Forms.TreeNode treeNode19 = new System.Windows.Forms.TreeNode("Node6", new System.Windows.Forms.TreeNode[] {
+            treeNode17,
+            treeNode18});
+            System.Windows.Forms.TreeNode treeNode20 = new System.Windows.Forms.TreeNode("Node9");
             this.TaskPaneTabControl = new System.Windows.Forms.TabControl();
             this.Templating = new System.Windows.Forms.TabPage();
             this.AutoGenerate = new System.Windows.Forms.Button();
@@ -56,9 +56,9 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.bookMarkTypeComboBox = new System.Windows.Forms.ComboBox();
             this.Binding = new System.Windows.Forms.TabPage();
-            this.Help = new System.Windows.Forms.TabPage();
-            this.treeView1 = new System.Windows.Forms.TreeView();
             this.label3 = new System.Windows.Forms.Label();
+            this.treeView1 = new System.Windows.Forms.TreeView();
+            this.Help = new System.Windows.Forms.TabPage();
             bookMarkTypeLabel = new System.Windows.Forms.Label();
             this.TaskPaneTabControl.SuspendLayout();
             this.Templating.SuspendLayout();
@@ -177,46 +177,6 @@
             this.Binding.Text = "Binding";
             this.Binding.UseVisualStyleBackColor = true;
             // 
-            // Help
-            // 
-            this.Help.Location = new System.Drawing.Point(4, 22);
-            this.Help.Name = "Help";
-            this.Help.Size = new System.Drawing.Size(418, 492);
-            this.Help.TabIndex = 2;
-            this.Help.Text = "Help";
-            this.Help.UseVisualStyleBackColor = true;
-            // 
-            // treeView1
-            // 
-            this.treeView1.Location = new System.Drawing.Point(13, 33);
-            this.treeView1.Name = "treeView1";
-            treeNode21.Name = "Node1";
-            treeNode21.Text = "Node1";
-            treeNode22.Name = "Node4";
-            treeNode22.Text = "Node4";
-            treeNode23.Name = "Node5";
-            treeNode23.Text = "Node5";
-            treeNode24.Name = "Node2";
-            treeNode24.Text = "Node2";
-            treeNode25.Name = "Node3";
-            treeNode25.Text = "Node3";
-            treeNode26.Name = "Node0";
-            treeNode26.Text = "Node0";
-            treeNode27.Name = "Node7";
-            treeNode27.Text = "Node7";
-            treeNode28.Name = "Node8";
-            treeNode28.Text = "Node8";
-            treeNode29.Name = "Node6";
-            treeNode29.Text = "Node6";
-            treeNode30.Name = "Node9";
-            treeNode30.Text = "Node9";
-            this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode26,
-            treeNode29,
-            treeNode30});
-            this.treeView1.Size = new System.Drawing.Size(121, 97);
-            this.treeView1.TabIndex = 0;
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -225,6 +185,46 @@
             this.label3.Size = new System.Drawing.Size(96, 13);
             this.label3.TabIndex = 1;
             this.label3.Text = "AutoDoc Data Info";
+            // 
+            // treeView1
+            // 
+            this.treeView1.Location = new System.Drawing.Point(13, 33);
+            this.treeView1.Name = "treeView1";
+            treeNode11.Name = "Node1";
+            treeNode11.Text = "Node1";
+            treeNode12.Name = "Node4";
+            treeNode12.Text = "Node4";
+            treeNode13.Name = "Node5";
+            treeNode13.Text = "Node5";
+            treeNode14.Name = "Node2";
+            treeNode14.Text = "Node2";
+            treeNode15.Name = "Node3";
+            treeNode15.Text = "Node3";
+            treeNode16.Name = "Node0";
+            treeNode16.Text = "Node0";
+            treeNode17.Name = "Node7";
+            treeNode17.Text = "Node7";
+            treeNode18.Name = "Node8";
+            treeNode18.Text = "Node8";
+            treeNode19.Name = "Node6";
+            treeNode19.Text = "Node6";
+            treeNode20.Name = "Node9";
+            treeNode20.Text = "Node9";
+            this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode16,
+            treeNode19,
+            treeNode20});
+            this.treeView1.Size = new System.Drawing.Size(121, 97);
+            this.treeView1.TabIndex = 0;
+            // 
+            // Help
+            // 
+            this.Help.Location = new System.Drawing.Point(4, 22);
+            this.Help.Name = "Help";
+            this.Help.Size = new System.Drawing.Size(421, 498);
+            this.Help.TabIndex = 2;
+            this.Help.Text = "Help";
+            this.Help.UseVisualStyleBackColor = true;
             // 
             // UserControlTaskPane
             // 

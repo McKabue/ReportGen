@@ -37,9 +37,9 @@ namespace ReportGen
 
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
-            var _context = new DatabaseContext();
-            var MySqlInitializer = new MySqlInitializer();
-            MySqlInitializer.InitializeDatabase(_context);
+            //var _context = new DatabaseContext();
+            //var MySqlInitializer = new MySqlInitializer();
+            //MySqlInitializer.InitializeDatabase(_context);
             //var _context = new DatabaseContext();
             //var SQLITEInitializer = new SQLITEInitializer();
             //SQLITEInitializer.InitializeDatabase(_context);
