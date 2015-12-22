@@ -19,8 +19,46 @@ namespace ReportGen
             this.bookMarkTypeComboBox.DisplayMember = "BookMarkTypeString";
             this.bookMarkTypeComboBox.ValueMember = "BookMarkTypeID";
             //this.bookMarkTypeComboBox.disabled
+            string link = ThisAddIn.appRootDir + @"\Help\HELP.html";
+            //this.HelpWebBrowser.Url = new System.Uri(link, System.UriKind.Absolute);
+
+
+            LoadBindings();
+            
+            //this.HelpWebBrowser.
         }
-        
+
+        private void LoadBindings()
+        {
+            _unitOfWork.AutoDocumentRepository.GetAll().ForEach(au =>
+            {
+                au = _unitOfWork.AutoDocumentRepository.FindBy(id => id.AutoDocumentID == au.AutoDocumentID, "BookMarkDatas");
+
+                TreeNode document = new TreeNode(au.Name);
+
+                _unitOfWork.BookMarkRepository.GetAll().ForEach(bkmk =>
+                {
+                    var bkd = au.BookMarkDatas.Where(aubd => aubd.BookMarkID == bkmk.BookMarkID).FirstOrDefault();
+                    if (bkd == null)
+                    {
+                        var node = new TreeNode(bkmk.BookmarkName);
+                        node.ForeColor = System.Drawing.Color.Red;
+                        document.Nodes.Add(node);
+
+                        // document.ForeColor = System.Drawing.Color.Black;
+                        document.ForeColor = System.Drawing.Color.Red;
+                        document.Checked = true;
+                    }
+                    else
+                    {
+                        document.Nodes.Add(new TreeNode((bkmk.BookmarkName + " = " + bkd.BookMarkValue)));
+                    }
+
+                });
+                this.treeView1.Nodes.Add(document);
+            });
+        }
+
         private void MakeVariable_Click(object sender, EventArgs e)
         {
             //MessageBox.Show("Make Variable?", "hhh", MessageBoxButtons.YesNoCancel);
@@ -57,6 +95,8 @@ namespace ReportGen
             _extentions.CreateTemplatedDocuments(Globals.ThisAddIn.Application.ActiveDocument, data);
         }
 
+        
+
         //private void button1_Click(object sender, EventArgs e)
         //{
         //    //Word.Dialog dlg = Globals.ThisAddIn.Application.Dialogs[Word.WdWordDialog.wdDialogInsertPicture];
@@ -67,7 +107,7 @@ namespace ReportGen
         //    form.Show(new WindowInplementation(new IntPtr(Globals.ThisAddIn.Application.Windows[1].Hwnd)));
         //}
 
-        
+
 
 
 

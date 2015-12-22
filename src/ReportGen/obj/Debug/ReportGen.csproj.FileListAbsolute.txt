@@ -80,7 +80,6 @@ E:\ReportGen\src\ReportGen\bin\Debug\pt\Microsoft.SqlServer.Types.resources.dll
 E:\ReportGen\src\ReportGen\bin\Debug\ru\Microsoft.SqlServer.Types.resources.dll
 E:\ReportGen\src\ReportGen\bin\Debug\zh-Hans\Microsoft.SqlServer.Types.resources.dll
 E:\ReportGen\src\ReportGen\bin\Debug\zh-Hant\Microsoft.SqlServer.Types.resources.dll
-E:\ReportGen\src\ReportGen\obj\Debug\ReportGen.csprojResolveAssemblyReference.cache
 E:\ReportGen\src\ReportGen\obj\Debug\ReportGen.BookmarkDataPopup.resources
 E:\ReportGen\src\ReportGen\obj\Debug\ReportGen.ControlForm.resources
 E:\ReportGen\src\ReportGen\obj\Debug\ReportGen.NewAutoDocument.resources
@@ -90,3 +89,4 @@ E:\ReportGen\src\ReportGen\obj\Debug\ReportGen.UserControlTaskPane.resources
 E:\ReportGen\src\ReportGen\obj\Debug\ReportGen.csproj.GenerateResource.Cache
 E:\ReportGen\src\ReportGen\obj\Debug\ReportGen.dll
 E:\ReportGen\src\ReportGen\obj\Debug\ReportGen.pdb
+E:\ReportGen\src\ReportGen\obj\Debug\ReportGen.csprojResolveAssemblyReference.cache

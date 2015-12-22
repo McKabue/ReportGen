@@ -8,11 +8,13 @@ using System;
 using ReportGen.Tools.DAL;
 using System.Linq;
 using System.Data.Entity.Migrations;
+using System.IO;
 
 namespace ReportGen
 {
     public partial class ThisAddIn
     {
+        public static string appRootDir = new DirectoryInfo(Environment.CurrentDirectory).Parent.Parent.FullName;
         public UserControlTaskPane _userControlTaskPane;
         private Microsoft.Office.Tools.CustomTaskPane myCustomTaskPane;
         public Microsoft.Office.Tools.CustomTaskPane TaskPane
@@ -75,10 +77,9 @@ namespace ReportGen
 
         public void documentChangeEvent()
         {
-            
-            var vstoDocument = Globals.Factory.GetVstoObject(Globals.ThisAddIn.Application.ActiveDocument);
-            vstoDocument.SelectionChange += new Microsoft.Office.Tools.Word.SelectionEventHandler(UserControlTaskPane.ThisDocument_SelectionChange);
-
+                var vstoDocument = Globals.Factory.GetVstoObject(Globals.ThisAddIn.Application.ActiveDocument);
+                vstoDocument.SelectionChange += new Microsoft.Office.Tools.Word.SelectionEventHandler(UserControlTaskPane.ThisDocument_SelectionChange); 
+         
             
         }
 
