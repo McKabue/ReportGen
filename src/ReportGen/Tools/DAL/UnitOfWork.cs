@@ -2,6 +2,8 @@
 using ReportGen.Tools.Models;
 using ReportGen.Tools.Repositories;
 using System;
+using ReportGen.Tools;
+using System.Data.Entity.Core.Objects;
 
 namespace ReportGen.Tools.DAL
 {
@@ -83,13 +85,15 @@ namespace ReportGen.Tools.DAL
                 {
                     this.bookMarkDataRepository = new BaseRepository<BookMarkData>(context);
                 }
+                //return context.Entry<BookMarkData>(context.BookMarkDatas).Reload();
                 return bookMarkDataRepository;
             }
         }
 
-        public int Save()
+        public void Save()
         {
-           return context.SaveChanges();
+           context.SaveChanges();
+           context.RefreshAllEntites(RefreshMode.StoreWins);
         }
 
 

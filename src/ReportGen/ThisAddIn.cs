@@ -27,6 +27,8 @@ namespace ReportGen
         }
         private Methods _methods = new Methods();
 
+        //public UnitOfWork 
+
         public Microsoft.Office.Tools.Word.Controls.CheckBox ToggleControl = new Microsoft.Office.Tools.Word.Controls.CheckBox();
         public Microsoft.Office.Tools.Word.Controls.CheckBox AutoDocSavePDF = new Microsoft.Office.Tools.Word.Controls.CheckBox();
 
