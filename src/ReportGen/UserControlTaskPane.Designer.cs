@@ -43,6 +43,7 @@
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.Help = new System.Windows.Forms.TabPage();
             this.HelpWebBrowser = new System.Windows.Forms.WebBrowser();
+            this.button1 = new System.Windows.Forms.Button();
             bookMarkTypeLabel = new System.Windows.Forms.Label();
             this.TaskPaneTabControl.SuspendLayout();
             this.Templating.SuspendLayout();
@@ -181,6 +182,7 @@
             // 
             // Help
             // 
+            this.Help.Controls.Add(this.button1);
             this.Help.Controls.Add(this.HelpWebBrowser);
             this.Help.Location = new System.Drawing.Point(4, 22);
             this.Help.Name = "Help";
@@ -191,13 +193,22 @@
             // 
             // HelpWebBrowser
             // 
-            this.HelpWebBrowser.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.HelpWebBrowser.Location = new System.Drawing.Point(0, 0);
+            this.HelpWebBrowser.Location = new System.Drawing.Point(3, 3);
             this.HelpWebBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.HelpWebBrowser.Name = "HelpWebBrowser";
-            this.HelpWebBrowser.Size = new System.Drawing.Size(421, 498);
+            this.HelpWebBrowser.Size = new System.Drawing.Size(394, 196);
             this.HelpWebBrowser.TabIndex = 0;
             this.HelpWebBrowser.Url = new System.Uri("", System.UriKind.Relative);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(55, 293);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // UserControlTaskPane
             // 
@@ -231,5 +242,6 @@
         public System.Windows.Forms.TextBox textBox1;
         public System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.WebBrowser HelpWebBrowser;
+        private System.Windows.Forms.Button button1;
     }
 }

@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
+using System.Xml.Serialization;
 using Word = Microsoft.Office.Interop.Word;
 
 namespace ReportGen.Tools
@@ -43,6 +45,9 @@ namespace ReportGen.Tools
                     range.Font.Shading.BackgroundPatternColor = Word.WdColor.wdColorDarkGreen;
 
                     BookMark newBookmark = null;
+                    /////////////////////////////////////
+                    Microsoft.Office.Core.CustomXMLParts xml = Document.CustomXMLParts.SelectByNamespace("TemplateCustomXML");
+                    /////////////////////////////////////
                     Template _temp = _unitOfWork.TemplateRepository.FindBy(id => id.Path == Document.FullName);
                     if (_temp != null)
                     {
@@ -77,9 +82,11 @@ namespace ReportGen.Tools
                             _saveTemplateForm.Dispose();
                         }
                         //_saveTemplateForm.dis.Show(new WindowInplementation(new IntPtr(Globals.ThisAddIn.Application.Windows[1].Hwnd)));
-                        _unitOfWork.TemplateRepository.Add(new Template { TemplateID = Guid.NewGuid().ToString("D"), Name = _saveTemplateForm.TName.Text, Number = Convert.ToInt32(_saveTemplateForm.AutoDocs.Value), BookMarks = new List<BookMark> { new BookMark { BookMarkID = Guid.NewGuid().ToString("D"), BookmarkName = bookmarkName, BookMarkTypeID = bookMarkTypeId }}, Path = Document.FullName });
+                        _temp = new Template { TemplateID = Guid.NewGuid().ToString("D"), Name = _saveTemplateForm.TName.Text, Number = Convert.ToInt32(_saveTemplateForm.AutoDocs.Value), BookMarks = new List<BookMark> { new BookMark { BookMarkID = Guid.NewGuid().ToString("D"), BookmarkName = bookmarkName, BookMarkTypeID = bookMarkTypeId } }, Path = Document.FullName };
+                        _unitOfWork.TemplateRepository.Add(_temp);
                         //else _unitOfWork.TemplateRepository.Add(new Template { TemplateID = Guid.NewGuid().ToString("D"), Name = _saveTemplateForm.TName.Text, Number = _saveTemplateForm.AutoDocs.Value, Path = Document.FullName });
-
+                        string xmlString = Encoding.UTF8.GetString(GetTemplateXML(_temp.TemplateID).ToArray());
+                        Document.CustomXMLParts.Add(xmlString);
                     }
                 } 
             }
@@ -126,8 +133,8 @@ namespace ReportGen.Tools
 
                 Word.Document thisDoc = this.ApplyData(doc, i.AutoDocumentID);
 
-
-
+                string xmlString = Encoding.UTF8.GetString(GetAutoDocumentXML(i.AutoDocumentID).ToArray());
+                thisDoc.CustomXMLParts.Add(xmlString);
 
 
 
@@ -220,6 +227,67 @@ namespace ReportGen.Tools
 
 
             return doc;
+        }
+
+
+        //https://msdn.microsoft.com/en-us/library/system.xml.serialization.xmlserializer%28v=vs.110%29.aspx
+        //https://msdn.microsoft.com/en-us/library/bb608612.aspx
+        public MemoryStream GetAutoDocumentXML(string AutoDocumentID)
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(AutoDocumentCustomXML));
+
+            /* If the XML document has been altered with unknown nodes or attributes, handle them with the UnknownNode and UnknownAttribute events.*/
+            serializer.UnknownNode += new XmlNodeEventHandler(serializer_UnknownNode);
+            serializer.UnknownAttribute += new XmlAttributeEventHandler(serializer_UnknownAttribute);
+
+            MemoryStream memoryStream = new MemoryStream();
+
+            AutoDocument doc = _unitOfWork.AutoDocumentRepository.FindBy(id => id.AutoDocumentID == AutoDocumentID);
+            AutoDocumentCustomXML jXML = new AutoDocumentCustomXML();
+            jXML.AutoDocumentID = doc.AutoDocumentID;
+            jXML.AutoDocumentName = doc.Name;
+
+
+
+
+            serializer.Serialize(memoryStream, jXML);
+            //memoryStream.Close();
+            return memoryStream;
+        }
+
+        public MemoryStream GetTemplateXML(string TemplateID)
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(TemplateCustomXML));
+
+            /* If the XML document has been altered with unknown nodes or attributes, handle them with the UnknownNode and UnknownAttribute events.*/
+            serializer.UnknownNode += new XmlNodeEventHandler(serializer_UnknownNode);
+            serializer.UnknownAttribute += new XmlAttributeEventHandler(serializer_UnknownAttribute);
+
+            MemoryStream memoryStream = new MemoryStream();
+
+            Template doc = _unitOfWork.TemplateRepository.FindBy(id => id.TemplateID == TemplateID);
+            TemplateCustomXML jXML = new TemplateCustomXML();
+            jXML.TemplateID = "doc.TemplateID";
+            jXML.TemplateName = "doc.Name";
+
+
+
+
+            serializer.Serialize(memoryStream, jXML);
+            //memoryStream.Close();
+            return memoryStream;
+        }
+
+
+        private void serializer_UnknownNode(object sender, XmlNodeEventArgs e)
+        {
+            System.Windows.Forms.MessageBox.Show("Unknown Node:" + e.Name + "\t" + e.Text);
+        }
+
+        private void serializer_UnknownAttribute(object sender, XmlAttributeEventArgs e)
+        {
+            System.Xml.XmlAttribute attr = e.Attr;
+            System.Windows.Forms.MessageBox.Show("Unknown attribute " + attr.Name + "='" + attr.Value + "'");
         }
     }
 }

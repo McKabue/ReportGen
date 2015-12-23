@@ -112,6 +112,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
     <DefineConstants>$(DefineConstants);DEBUG;TRACE</DefineConstants>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <!--
     This section defines properties that are set when the "Release" configuration is selected.
@@ -136,6 +137,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
     <DefineConstants>$(DefineConstants);TRACE</DefineConstants>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <!--
     This section specifies references for the project.
@@ -242,6 +244,7 @@
     <Compile Include="Tools\DAL\DatabaseContext.cs" />
     <Compile Include="Tools\DAL\UnitOfWork.cs" />
     <Compile Include="Tools\Extentions.cs" />
+    <Compile Include="Tools\AutoDocumentCustomXML.cs" />
     <Compile Include="Tools\Methods.cs" />
     <Compile Include="Tools\Models\AutoDocument.cs" />
     <Compile Include="Tools\Models\BookMark.cs" />
@@ -250,6 +253,13 @@
     <Compile Include="Tools\Models\Template.cs" />
     <Compile Include="Tools\Repositories\BaseRepository.cs" />
     <Compile Include="Tools\Interfaces\IBaseRepository.cs" />
+    <Compile Include="Tools\Security\Licence.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tools\Security\Licence.Designer.cs">
+      <DependentUpon>Licence.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\Security\Trial.cs" />
     <Compile Include="Tools\WindowInplementation.cs" />
     <Compile Include="Tools\XMLCustomParts.cs" />
     <Compile Include="UserControlTaskPane.cs">
@@ -304,6 +314,9 @@
     </Compile>
     <EmbeddedResource Include="SaveTemplateForm.resx">
       <DependentUpon>SaveTemplateForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\Security\Licence.resx">
+      <DependentUpon>Licence.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControlTaskPane.resx">
       <DependentUpon>UserControlTaskPane.cs</DependentUpon>
@@ -370,6 +383,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Help\app\mvvm\" />
+    <Folder Include="tests\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

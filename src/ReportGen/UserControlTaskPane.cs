@@ -3,6 +3,8 @@ using System.Linq;
 using System.Windows.Forms;
 using ReportGen.Tools.DAL;
 using ReportGen.Tools;
+using ReportGen.Tools.Security;
+using System.Diagnostics;
 
 namespace ReportGen
 {
@@ -30,11 +32,15 @@ namespace ReportGen
 
         private void LoadBindings()
         {
+            this.treeView1.DrawMode = TreeViewDrawMode.OwnerDrawText;
+            this.treeView1.DrawNode += new DrawTreeNodeEventHandler(DrawNode);
+
             _unitOfWork.AutoDocumentRepository.GetAll().ForEach(au =>
             {
                 au = _unitOfWork.AutoDocumentRepository.FindBy(id => id.AutoDocumentID == au.AutoDocumentID, "BookMarkDatas");
 
                 TreeNode document = new TreeNode(au.Name);
+                
 
                 _unitOfWork.BookMarkRepository.GetAll().ForEach(bkmk =>
                 {
@@ -56,7 +62,14 @@ namespace ReportGen
 
                 });
                 this.treeView1.Nodes.Add(document);
+                this.treeView1.CheckBoxes = true;
             });
+        }
+
+        void DrawNode(object sender, DrawTreeNodeEventArgs e)
+        {
+            if (e.Node.Level == 1) e.Node.HideCheckBox();
+            e.DrawDefault = true;
         }
 
         private void MakeVariable_Click(object sender, EventArgs e)
@@ -71,10 +84,15 @@ namespace ReportGen
 
         private void SaveBookmark_Click(object sender, EventArgs e)
         {
-            if (this.textBox1.Text != "")
+            if (System.Text.RegularExpressions.Regex.IsMatch(this.textBox1.Text.Trim(), @"^([a-zA-Z]|[a-zA-Z]+[a-zA-Z0-9])*$"))
             {
+                
                 // _extentions.InsertIntoBookmark(Globals.ThisAddIn.Application.ActiveDocument, this.textBox1.Text, (string)this.bookMarkTypeComboBox.SelectedValue, this.richTextBox1.Text);
                 _extentions.InsertIntoBookmark(Globals.ThisAddIn.Application.ActiveDocument, this.textBox1.Text, "1", this.richTextBox1.Text); 
+            }
+            else
+            {
+                MessageBox.Show("Bad name");
             }
         }
 
@@ -91,11 +109,19 @@ namespace ReportGen
 
         private void AutoGenerate_Click(object sender, EventArgs e)
         {
-            var data = _unitOfWork.AutoDocumentRepository.GetAll().ToList();
-            _extentions.CreateTemplatedDocuments(Globals.ThisAddIn.Application.ActiveDocument, data);
+            if ((Trial.CheckTrial()))
+            {
+                var data = _unitOfWork.AutoDocumentRepository.GetAll().ToList();
+                _extentions.CreateTemplatedDocuments(Globals.ThisAddIn.Application.ActiveDocument, data); 
+            }
         }
 
-        
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Process.Start(ThisAddIn.appRootDir + @"\Help\HELP.html");
+        }
+
+
 
         //private void button1_Click(object sender, EventArgs e)
         //{

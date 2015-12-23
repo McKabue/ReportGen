@@ -9,6 +9,7 @@ using ReportGen.Tools.DAL;
 using System.Linq;
 using System.Data.Entity.Migrations;
 using System.IO;
+using ReportGen.Tools.Security;
 
 namespace ReportGen
 {
@@ -38,11 +39,13 @@ namespace ReportGen
 
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
+            
+
+
+
+            //this.ribbon.ActivateTab("CustomTab");
+
             var _context = new DatabaseContext();
-            //if (!_context.Database.Exists())
-            //{
-            //    _context.Database.Create();
-            //}
             if (!_context.BookMarkTypes.Any())
             {
                 _context.BookMarkTypes.AddOrUpdate(
@@ -113,6 +116,7 @@ namespace ReportGen
 
         protected override Office.IRibbonExtensibility CreateRibbonExtensibilityObject()
         {
+            //return Globals.Factory.GetRibbonFactory().CreateRibbonManager(new Microsoft.Office.Tools.Ribbon.IRibbonExtension[] { new MyRibbon() });
             return new MyRibbon();
         }
 

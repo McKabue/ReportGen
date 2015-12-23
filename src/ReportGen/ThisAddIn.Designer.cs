@@ -9,8 +9,6 @@
 //------------------------------------------------------------------------------
 
 #pragma warning disable 414
-using System;
-
 namespace ReportGen {
     
     
@@ -36,9 +34,7 @@ namespace ReportGen {
                 base(factory, serviceProvider, "AddIn", "ThisAddIn") {
             Globals.Factory = factory;
         }
-
         
-
         /// 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Tools.Office.ProgrammingModel.dll", "14.0.0.0")]
@@ -232,8 +228,7 @@ namespace ReportGen {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Tools.Office.ProgrammingModel.dll", "14.0.0.0")]
     internal sealed partial class ThisRibbonCollection : Microsoft.Office.Tools.Ribbon.RibbonCollectionBase {
-
-
+        
         /// 
         internal ThisRibbonCollection(global::Microsoft.Office.Tools.Ribbon.RibbonFactory factory) : 
                 base(factory) {

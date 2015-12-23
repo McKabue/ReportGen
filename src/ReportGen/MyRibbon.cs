@@ -125,6 +125,7 @@ namespace ReportGen
         public void Ribbon_Load(Office.IRibbonUI ribbonUI)
         {
             this.ribbon = ribbonUI;
+            
         }
 
         #endregion

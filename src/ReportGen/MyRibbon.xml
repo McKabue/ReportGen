@@ -4,7 +4,7 @@
     <tabs>
      
       <tab idMso="TabHome">
-        <group idMso="GroupFont" visible="false" />
+        <group idMso="GroupFont" visible="true" />
       </tab>
       
       <tab id="CustomTab" label="REPORTGEN">
