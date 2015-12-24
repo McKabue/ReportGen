@@ -16,6 +16,9 @@
         <group id="saveFolder" label="Save Folder">
           <button id="Button1" label="AutoDocs Save Folder" size="large" onAction="AutoDocSavePDF" />
         </group>
+        <group id="refresh" label="Refresh Data">
+          <button id="refreshButton" label="Refresh Data" size="large" onAction="RefreshData" />
+        </group>
         <!--
         <group id="makeVariableGroup" label="Save As">
           <toggleButton size="large" id="dd" label="Make Variable" screentip="This is a check box" onAction="makeVariable" />

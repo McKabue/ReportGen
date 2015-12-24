@@ -117,6 +117,11 @@ namespace AutoDocx
             Globals.ThisAddIn.AutoDocSavePDF.Checked = pressed;
         }
 
+        public void RefreshData(Office.IRibbonControl control, bool pressed)
+        {
+            System.Windows.Forms.MessageBox.Show("Refresh??");
+        }
+
         #endregion
 
         #region Ribbon Callbacks

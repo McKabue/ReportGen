@@ -44,3 +44,4 @@ E:\ReportGen\src\AutoDocx\obj\Debug\AutoDocx.UserControlTaskPane.resources
 E:\ReportGen\src\AutoDocx\obj\Debug\AutoDocx.csproj.GenerateResource.Cache
 E:\ReportGen\src\AutoDocx\obj\Debug\AutoDocx.dll
 E:\ReportGen\src\AutoDocx\obj\Debug\AutoDocx.pdb
+E:\ReportGen\src\AutoDocx\obj\Debug\AutoDocx.csprojResolveAssemblyReference.cache
