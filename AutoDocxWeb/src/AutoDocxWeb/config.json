@@ -1,0 +1,10 @@
+{
+  "AppSettings": {
+    "SiteTitle": "AutoDocxWeb"
+  },
+  "Data": {
+    "DefaultConnection": {
+      "ConnectionString": "Server=(localdb)\\mssqllocaldb;Database=aspnet5-AutoDocxWeb-de1416b4-3609-4781-b5de-cc203c159ff1;Trusted_Connection=True;MultipleActiveResultSets=true"
+    }
+  }
+}

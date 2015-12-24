@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<customUI xmlns="http://schemas.microsoft.com/office/2009/07/customui" onLoad="Ribbon_Load">
+  <ribbon>
+    <tabs>
+     
+      <tab idMso="TabHome">
+        <group idMso="GroupFont" visible="true" />
+      </tab>
+      
+      <tab id="CustomTab" label="AUTODOCX">
+
+        <group id="saveAsGroup" label="Save As">
+          <checkBox id="CheckBox1" label="Save AutoDocs AS PDF" onAction="AutoDocSavePDF" />
+          <!--<button id="saveAsPDF" label="PDF" screentip="Text" onAction="SaveAsPDF" supertip="Inserts text at the cursor location."/>-->
+          </group>
+        <group id="saveFolder" label="Save Folder">
+          <button id="Button1" label="AutoDocs Save Folder" size="large" onAction="AutoDocSavePDF" />
+        </group>
+        <!--
+        <group id="makeVariableGroup" label="Save As">
+          <toggleButton size="large" id="dd" label="Make Variable" screentip="This is a check box" onAction="makeVariable" />
+        </group>
+        <group id="ContentGroup" label="Content">
+          <button id="textButton" label="Insert Text" screentip="Text" onAction="OnTextButton" supertip="Inserts text at the cursor location."/>
+          <button id="tableButton" label="Insert Table" screentip="Table" onAction="OnTableButton" supertip="Inserts a table at the cursor location."/>
+          <toggleButton label="Show TaskPane" id="toggleButton1" onAction="ToggleButtonOnAction" />
+          <dialogBoxLauncher>
+            <button id="Launcher1" screentip="My Launcher"
+              onAction="dialogForm" />
+          </dialogBoxLauncher>
+        </group>
+        -->
+        <!--
+        <group id="SampleGroup" label="Sample Group">
+          <comboBox id="Combo1" label="My ComboBox"
+            onChange="ThisDocument.MyComboBoxMacro">
+            <item id="Zip1" label="33455" />
+            <item id="Zip2" label="81611" />
+            <item id="Zip3" label="31561" />
+          </comboBox>
+        </group>
+        <group id="MyGroup" label="Sample My Group" >
+          <button id="Button2" label="My Normal Button"
+            size="normal" onAction="ThisDocument.MyOtherButtonMacro" />
+        </group >
+        -->
+      </tab>
+    </tabs>
+  </ribbon>
+</customUI>
+
