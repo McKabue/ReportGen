@@ -5,6 +5,7 @@ using AutoDocx.Tools.DAL;
 using AutoDocx.Tools;
 using AutoDocx.Tools.Security;
 using System.Diagnostics;
+using System.Drawing;
 
 namespace AutoDocx
 {
@@ -70,9 +71,10 @@ namespace AutoDocx
         {
             if (e.Node.Level == 1)
             {
-                e.Node.HideCheckBox(); 
-                //e.Node.NodeFont = 
+                e.Node.HideCheckBox();
             }
+            //e.Node.NodeFont = new System.Drawing.Font("Aerial", 10, FontStyle.Bold);
+            //e.Node.Text = e.Node.Text;
             e.DrawDefault = true;
         }
 
@@ -111,10 +113,11 @@ namespace AutoDocx
             _methods.IsBookmark();
         }
 
-        private void AutoGenerate_Click(object sender, EventArgs e)
+        private async void AutoGenerate_Click(object sender, EventArgs e)
         {
-            if ((Trial.CheckTrial()))
+            if ((await Trial.CheckTrial()))
             {
+                //var selectednodes = treeView1.Nodes.Descendants().Where(n => n.Checked).Select(n => n.Text);
                 var data = _unitOfWork.AutoDocumentRepository.GetAll().ToList();
                 _extentions.CreateTemplatedDocuments(Globals.ThisAddIn.Application.ActiveDocument, data); 
             }
@@ -124,7 +127,12 @@ namespace AutoDocx
         {
             Process.Start(ThisAddIn.appRootDir + @"\Help\HELP.html");
         }
-        
+
+        private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            MessageBox.Show(e.Node.Text);
+        }
+
 
 
 

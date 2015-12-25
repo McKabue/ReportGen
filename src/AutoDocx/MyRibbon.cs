@@ -117,9 +117,20 @@ namespace AutoDocx
             Globals.ThisAddIn.AutoDocSavePDF.Checked = pressed;
         }
 
-        public void RefreshData(Office.IRibbonControl control, bool pressed)
+        public void RefreshData(Office.IRibbonControl control)
         {
-            System.Windows.Forms.MessageBox.Show("Refresh??");
+
+            //System.Windows.Forms.SaveFileDialog save = new System.Windows.Forms.SaveFileDialog();
+            //save.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            //save.RestoreDirectory = true;
+
+            System.Windows.Forms.FolderBrowserDialog fbd = new System.Windows.Forms.FolderBrowserDialog();
+            if(fbd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                System.Windows.Forms.MessageBox.Show(fbd.SelectedPath);
+            }
+
+
         }
 
         #endregion

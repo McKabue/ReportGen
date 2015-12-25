@@ -1,17 +1,40 @@
 ﻿using System;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace AutoDocx.Tools.Security
 {
     public class Trial
     {
+        private static HttpMessageHandler _httpClientHandler;
+
         public static DateTime Now { get { return DateTime.UtcNow; } }
         public static DateTime ExpirationDate { get { return DateTime.UtcNow.AddDays(7); } }
 
 
-        public static bool CheckTrial()
+        public async static Task<bool> CheckTrial()
         {
 
-            
+            string apiBaseAddress = "http://localhost:21934/";
+
+            CustomDelegatingHandler customDelegatingHandler = new CustomDelegatingHandler();
+
+            HttpClient client = HttpClientFactory.Create(customDelegatingHandler);
+
+            HttpResponseMessage response = await client.PostAsJsonAsync(apiBaseAddress + "api/RealTimeUpdates/AddAnswer", "key");
+
+            if (response.IsSuccessStatusCode)
+            {
+                string responseString = await response.Content.ReadAsStringAsync();
+
+                return true;
+            }
+            else
+            {
+                string responseString = String.Format("Failed to call the API. HTTP Status: {0}, Reason {1}", response.StatusCode, response.ReasonPhrase);
+
+                return false;
+            }
 
 
 

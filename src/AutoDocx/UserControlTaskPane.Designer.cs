@@ -38,12 +38,12 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.bookMarkTypeComboBox = new System.Windows.Forms.ComboBox();
             this.Binding = new System.Windows.Forms.TabPage();
+            this.AutoGenerate = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.Help = new System.Windows.Forms.TabPage();
             this.button1 = new System.Windows.Forms.Button();
             this.HelpWebBrowser = new System.Windows.Forms.WebBrowser();
-            this.AutoGenerate = new System.Windows.Forms.Button();
             bookMarkTypeLabel = new System.Windows.Forms.Label();
             this.TaskPaneTabControl.SuspendLayout();
             this.Templating.SuspendLayout();
@@ -153,6 +153,18 @@
             this.Binding.Text = "Binding";
             this.Binding.UseVisualStyleBackColor = true;
             // 
+            // AutoGenerate
+            // 
+            this.AutoGenerate.AutoSize = true;
+            this.AutoGenerate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AutoGenerate.Location = new System.Drawing.Point(297, 3);
+            this.AutoGenerate.Name = "AutoGenerate";
+            this.AutoGenerate.Size = new System.Drawing.Size(118, 26);
+            this.AutoGenerate.TabIndex = 24;
+            this.AutoGenerate.Text = "Auto-Generate";
+            this.AutoGenerate.UseVisualStyleBackColor = true;
+            this.AutoGenerate.Click += new System.EventHandler(this.AutoGenerate_Click);
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -170,6 +182,8 @@
             this.treeView1.Name = "treeView1";
             this.treeView1.Size = new System.Drawing.Size(415, 470);
             this.treeView1.TabIndex = 0;
+            this.treeView1.TabStop = false;
+            this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             // 
             // Help
             // 
@@ -200,18 +214,6 @@
             this.HelpWebBrowser.Size = new System.Drawing.Size(394, 196);
             this.HelpWebBrowser.TabIndex = 0;
             this.HelpWebBrowser.Url = new System.Uri("", System.UriKind.Relative);
-            // 
-            // AutoGenerate
-            // 
-            this.AutoGenerate.AutoSize = true;
-            this.AutoGenerate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AutoGenerate.Location = new System.Drawing.Point(297, 3);
-            this.AutoGenerate.Name = "AutoGenerate";
-            this.AutoGenerate.Size = new System.Drawing.Size(118, 26);
-            this.AutoGenerate.TabIndex = 24;
-            this.AutoGenerate.Text = "Auto-Generate";
-            this.AutoGenerate.UseVisualStyleBackColor = true;
-            this.AutoGenerate.Click += new System.EventHandler(this.AutoGenerate_Click);
             // 
             // UserControlTaskPane
             // 
