@@ -15,13 +15,15 @@ namespace AutoDocx.Tools.Security
         public async static Task<bool> CheckTrial()
         {
 
-            string apiBaseAddress = "http://localhost:21934/";
+            string apiBaseAddress = "http://localhost:57124/";
 
             CustomDelegatingHandler customDelegatingHandler = new CustomDelegatingHandler();
 
             HttpClient client = HttpClientFactory.Create(customDelegatingHandler);
 
-            HttpResponseMessage response = await client.PostAsJsonAsync(apiBaseAddress + "api/RealTimeUpdates/AddAnswer", "key");
+            object pandlock = "pandlock";
+
+            HttpResponseMessage response = await client.PostAsJsonAsync(apiBaseAddress + "api/AppRegistry/Register", pandlock);
 
             if (response.IsSuccessStatusCode)
             {

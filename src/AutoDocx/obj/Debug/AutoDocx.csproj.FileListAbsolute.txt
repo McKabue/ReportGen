@@ -30,7 +30,6 @@ E:\ReportGen\src\AutoDocx\bin\Debug\Microsoft.Office.Tools.Common.xml
 E:\ReportGen\src\AutoDocx\bin\Debug\Microsoft.Office.Tools.Word.xml
 E:\ReportGen\src\AutoDocx\bin\Debug\Microsoft.Office.Tools.Common.v4.0.Utilities.xml
 E:\ReportGen\src\AutoDocx\obj\Debug\AutoDocx.csproj.App.config
-E:\ReportGen\src\AutoDocx\obj\Debug\AutoDocx.csprojResolveAssemblyReference.cache
 E:\ReportGen\src\AutoDocx\obj\Debug\AutoDocx.BookmarkDataPopup.resources
 E:\ReportGen\src\AutoDocx\obj\Debug\AutoDocx.ControlForm.resources
 E:\ReportGen\src\AutoDocx\obj\Debug\AutoDocx.NewAutoDocument.resources
@@ -41,3 +40,4 @@ E:\ReportGen\src\AutoDocx\obj\Debug\AutoDocx.UserControlTaskPane.resources
 E:\ReportGen\src\AutoDocx\obj\Debug\AutoDocx.csproj.GenerateResource.Cache
 E:\ReportGen\src\AutoDocx\obj\Debug\AutoDocx.dll
 E:\ReportGen\src\AutoDocx\obj\Debug\AutoDocx.pdb
+E:\ReportGen\src\AutoDocx\obj\Debug\AutoDocx.csprojResolveAssemblyReference.cache

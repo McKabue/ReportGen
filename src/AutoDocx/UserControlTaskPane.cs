@@ -6,6 +6,8 @@ using AutoDocx.Tools;
 using AutoDocx.Tools.Security;
 using System.Diagnostics;
 using System.Drawing;
+using Word = Microsoft.Office.Interop.Word;
+using AutoDocx.Tools;
 
 namespace AutoDocx
 {
@@ -25,46 +27,78 @@ namespace AutoDocx
             string link = ThisAddIn.appRootDir + @"\Help\HELP.html";
             //this.HelpWebBrowser.Url = new System.Uri(link, System.UriKind.Absolute);
 
-
-            LoadBindings();
+            this.TaskPaneTabControl.SelectedIndexChanged += TaskPaneTabControl_SelectedIndexChanged;
+            
             
             //this.HelpWebBrowser.
         }
 
+        private void TaskPaneTabControl_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            TabControl ctr = sender as TabControl;
+            if (ctr.SelectedTab == ctr.TabPages["Binding"])
+            {
+                
+                LoadBindings();
+            }
+        }
+
         private void LoadBindings()
         {
+            this.treeView1.Nodes.Clear();
+
             this.treeView1.DrawMode = TreeViewDrawMode.OwnerDrawText;
             this.treeView1.DrawNode += new DrawTreeNodeEventHandler(DrawNode);
 
-            _unitOfWork.AutoDocumentRepository.GetAll().ForEach(au =>
+            Methods _methods = new Methods();
+            TemplateCustomXML tXML = _methods.ReadXML<TemplateCustomXML>(Globals.ThisAddIn.Application.ActiveDocument);
+            Tools.Models.Template _temp = null;
+            if (tXML != null)
             {
-                au = _unitOfWork.AutoDocumentRepository.FindBy(id => id.AutoDocumentID == au.AutoDocumentID, "BookMarkDatas");
-
-                TreeNode document = new TreeNode(au.Name);
+                _temp = _temp = ThisAddIn._document<Tools.Models.Template>(tXML.TemplateID);// 
                 
-
-                _unitOfWork.BookMarkRepository.GetAll().ForEach(bkmk =>
+                _temp.AutoDocuments.ForEach(au =>
                 {
-                    var bkd = au.BookMarkDatas.Where(aubd => aubd.BookMarkID == bkmk.BookMarkID).FirstOrDefault();
-                    if (bkd == null)
-                    {
-                        var node = new TreeNode(bkmk.BookmarkName);
-                        node.ForeColor = System.Drawing.Color.Red;
-                        document.Nodes.Add(node);
+                    au = _unitOfWork.AutoDocumentRepository.FindBy(id => id.AutoDocumentID == au.AutoDocumentID, "BookMarkDatas");
 
-                        // document.ForeColor = System.Drawing.Color.Black;
-                        document.ForeColor = System.Drawing.Color.Red;
-                        document.Checked = true;
-                    }
-                    else
+                    TreeNode document = new TreeNode(au.Name);
+                    document.Name = au.AutoDocumentID;
+
+
+                    _temp.BookMarks.ForEach(bkmk =>
                     {
-                        document.Nodes.Add(new TreeNode((bkmk.BookmarkName + " = " + bkd.BookMarkValue)));
-                    }
+                        var bkd = au.BookMarkDatas.Where(aubd => aubd.BookMarkID == bkmk.BookMarkID).FirstOrDefault();
+                        if (bkd == null)
+                        {
+                            var node = new TreeNode(bkmk.BookmarkName);
+                            node.Tag = bkmk.BookmarkName;
+                            node.Name = bkmk.BookMarkID;
+                            node.ForeColor = System.Drawing.Color.Red;
+                            document.Nodes.Add(node);
+
+                            // document.ForeColor = System.Drawing.Color.Black;
+                            document.ForeColor = System.Drawing.Color.Red;
+
+                        }
+                        else
+                        {
+                            var node = new TreeNode((bkmk.BookmarkName + " = " + bkd.BookMarkValue));
+                            node.Tag = bkmk.BookmarkName;
+                            node.Name = bkmk.BookMarkID;
+                            document.Nodes.Add(node);
+
+                        }
+
+
+                    });
+
+                    document.Checked = document.Nodes.Descendants().Where(n => n.ForeColor == System.Drawing.Color.Red).Any() ? false : true;
+                    this.treeView1.Nodes.Add(document);
+                    this.treeView1.CheckBoxes = true;
 
                 });
-                this.treeView1.Nodes.Add(document);
-                this.treeView1.CheckBoxes = true;
-            });
+            }
+            
         }
 
         void DrawNode(object sender, DrawTreeNodeEventArgs e)
@@ -113,25 +147,34 @@ namespace AutoDocx
             _methods.IsBookmark();
         }
 
-        private async void AutoGenerate_Click(object sender, EventArgs e)
+        private void AutoGenerate_Click(object sender, EventArgs e)
         {
-            if ((await Trial.CheckTrial()))
-            {
+            //if ((await Trial.CheckTrial()))
+            //{
                 //var selectednodes = treeView1.Nodes.Descendants().Where(n => n.Checked).Select(n => n.Text);
                 var data = _unitOfWork.AutoDocumentRepository.GetAll().ToList();
                 _extentions.CreateTemplatedDocuments(Globals.ThisAddIn.Application.ActiveDocument, data); 
-            }
+            //}
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Process.Start(ThisAddIn.appRootDir + @"\Help\HELP.html");
+            //Process.Start(ThisAddIn.appRootDir + @"\Help\HELP.html");
         }
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            MessageBox.Show(e.Node.Text);
+            if (e.Node.Level != 0)
+            {
+                Word.Bookmark bk = Globals.ThisAddIn.Application.ActiveDocument.Bookmarks.get_Item(e.Node.Tag);
+                object missing = Type.Missing;
+                Globals.ThisAddIn.Application.ActiveWindow.ScrollIntoView(bk.Range, ref missing);
+
+                Methods.GoToBookmark(e.Node.Name, e.Node.Parent.Name);
+            }
         }
+
+        
 
 
 

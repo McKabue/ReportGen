@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<customUI xmlns="http://schemas.microsoft.com/office/2009/07/customui" onLoad="Ribbon_Load">
+<customUI xmlns="http://schemas.microsoft.com/office/2009/07/customui" onLoad="Ribbon_Load" loadImage="LoadImage" >
   <ribbon>
     <tabs>
      
@@ -9,16 +9,49 @@
       
       <tab id="CustomTab" label="AUTODOCX">
 
-        <group id="saveAsGroup" label="Save As">
-          <checkBox id="CheckBox1" label="Save AutoDocs AS PDF" onAction="AutoDocSavePDF" />
+        <group id="saveAsGroup">
+          <checkBox id="CheckBox1" label="AutoDocs AS PDF" onAction="AutoDocSavePDF" />
+          <checkBox id="CheckBox2" getPressed="checkedcheckbox" label="Show Taskpane" onAction="ShowTaskpane" />
           <!--<button id="saveAsPDF" label="PDF" screentip="Text" onAction="SaveAsPDF" supertip="Inserts text at the cursor location."/>-->
           </group>
         <group id="saveFolder" label="Save Folder">
-          <button id="Button1" label="AutoDocs Save Folder" size="large" onAction="AutoDocSavePDF" />
+          <button imageMso="Folder" id="Button1" label="AutoDocs Save Folder" size="large" onAction="AutoDocSaveFolder" />
         </group>
-        <group id="refresh" label="Refresh Data">
-          <button id="refreshButton" label="Refresh Data" size="large" onAction="RefreshData" />
+        <group id="savetemplate" label="Save Template">
+          <button imageMso="SaveAs" id="savetemplateButton" label="Save This Template" size="large" onAction="SaveTemplate" />
         </group>
+        <group id="Author" label="Contact">
+               <gallery id="gallery1" 
+                  columns="2" 
+                  rows="2"
+                  getEnabled="GetEnabled" 
+                  getScreentip="GetScreenTip" 
+                  supertip="This is the super tip." 
+                  getKeytip="GetKeyTip" 
+                  getShowImage="GetShowImage" 
+                  getShowLabel="GetShowLabel"
+                  getLabel="GetLabel" 
+                  getSize="GetSize" 
+                  image="dev.jpg" 
+                  getItemCount="GetItemCount" 
+                  getItemHeight="GetItemHeight" 
+                  getItemWidth="GetItemWidth" 
+                  getItemImage="GetItemImage" 
+                  getItemLabel="GetItemLabel" 
+                  getItemScreentip="GetItemScreenTip" 
+                  getItemSupertip="GetItemSuperTip"  
+                  onAction="galleryOnAction" >
+                     <item id="item1" />
+                     <item id="item2" />
+                     <item id="item3" />
+                     <item id="item4" />
+                     <button id="button1" getLabel="GetLabel" 
+                        onAction="buttonOnAction" 
+                        imageMso="HappyFace" />
+               </gallery>
+            </group>
+        
+        
         <!--
         <group id="makeVariableGroup" label="Save As">
           <toggleButton size="large" id="dd" label="Make Variable" screentip="This is a check box" onAction="makeVariable" />

@@ -118,7 +118,7 @@
             this.DateTime.Location = new System.Drawing.Point(4, 22);
             this.DateTime.Name = "DateTime";
             this.DateTime.Padding = new System.Windows.Forms.Padding(3);
-            this.DateTime.Size = new System.Drawing.Size(804, 322);
+            this.DateTime.Size = new System.Drawing.Size(804, 369);
             this.DateTime.TabIndex = 1;
             this.DateTime.Text = "DateTime";
             this.DateTime.UseVisualStyleBackColor = true;
@@ -152,7 +152,7 @@
         public System.Windows.Forms.TabPage PlainText;
         private System.Windows.Forms.TabPage DateTime;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+        public System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
     }
 }

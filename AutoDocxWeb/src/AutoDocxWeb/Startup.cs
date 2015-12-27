@@ -22,6 +22,7 @@ using Microsoft.Framework.Logging.Console;
 using Microsoft.Framework.Runtime;
 using AutoDocxWeb.Models;
 using AutoDocxWeb.Services;
+using AutoDocxWeb.Helpers;
 
 namespace AutoDocxWeb
 {
@@ -78,6 +79,23 @@ namespace AutoDocxWeb
 
             // Add MVC services to the services container.
             services.AddMvc();
+            //var defaultPolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+
+            //services.AddMvc(setup =>
+            //{
+            //    setup.Filters.Add(new AuthorizeFilter(defaultPolicy));
+            //});
+
+            //services.AddAuthorization(options =>
+            //{
+            //    options.AddPolicy("DevInterns", policy =>
+            //    {
+            //        policy.AddRequirements(new HMACAuthentication("development", "intern"));
+
+            //        // ..or using an extension method
+            //        //policy.RequireStatus("development", "intern");
+            //    });
+            //});
 
             // Uncomment the following line to add Web API services which makes it easier to port Web API 2 controllers.
             // You will also need to add the Microsoft.AspNet.Mvc.WebApiCompatShim package to the 'dependencies' section of project.json.

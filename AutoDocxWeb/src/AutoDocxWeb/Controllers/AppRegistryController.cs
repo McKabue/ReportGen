@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
+using AutoDocxWeb.Helpers;
+using Microsoft.AspNet.Authorization;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -11,6 +13,30 @@ namespace AutoDocxWeb.Controllers
     [Route("api/[controller]")]
     public class AppRegistryController : Controller
     {
+        private readonly IAuthorizationService _authz;
+
+        public AppRegistryController(IAuthorizationService authz)
+        {
+            _authz = authz;
+        }
+
+        [HttpPost]
+        [Route("Register")]
+        public async Task Register(string pandlock)
+        {
+            HMACAuthentication h = new HMACAuthentication();
+            //h.AuthenticateAsync(this.ActionContext.HttpContext.);
+                //throw new NotImplementedException();
+
+        }
+
+
+
+
+
+
+
+
         // GET: api/values
         [HttpGet]
         public IEnumerable<string> Get()

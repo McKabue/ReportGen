@@ -12,8 +12,10 @@ namespace AutoDocx.Tools.Models
 
         public int Number { get; set; }
 
-        public string Path { get; set; }
-        
+        public string TemplatePath { get; set; }
+
+        public string AutoDocumentsPath { get; set; }
+
         public ICollection<BookMark> BookMarks { get; set; }
 
         public ICollection<AutoDocument> AutoDocuments { get; set; }

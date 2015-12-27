@@ -61,7 +61,7 @@ namespace AutoDocx
                 flowLayoutPanel1.Controls.Add(lb1);
             }
         }
-        private void ButtonClick(object sender, EventArgs e)
+        public void ButtonClick(object sender, EventArgs e)
         {
             senderButton = sender as Button;
 
@@ -123,9 +123,8 @@ namespace AutoDocx
         {
             _autoDocSaveClick = sender as Button;
 
-
-            var _bk = _unitOfWork.BookMarkRepository.FindBy(id => id.BookmarkName == Globals.ThisAddIn._userControlTaskPane.textBox1.Text);
-            var docData = new BookMarkData { BookMarkDataID = Guid.NewGuid().ToString("D"), AutoDocumentID = senderButton.Name, BookMarkID = _bk.BookMarkID, BookMarkValue = richtxb.Text };
+            
+            var docData = new BookMarkData { BookMarkDataID = Guid.NewGuid().ToString("D"), AutoDocumentID = senderButton.Name, BookMarkID = bookMark.BookMarkID, BookMarkValue = richtxb.Text };
 
             _unitOfWork.BookMarkDataRepository.Add(docData);
             _unitOfWork.Save();

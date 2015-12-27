@@ -13,6 +13,7 @@ namespace AutoDocx.Tools
     public class Methods
     {
         private UnitOfWork _unitOfWork = ThisAddIn._unitOfWork;
+        private static string _AutoDocumentID;
 
 
         //http://stackoverflow.com/questions/21833102/vsto-addin-text-content-control
@@ -70,26 +71,11 @@ namespace AutoDocx.Tools
 
                     else
                     {
-                        SaveTemplateForm _saveTemplateForm = new SaveTemplateForm();
+                        _temp = ThisAddIn.SaveTemplate();
 
-                        if (_saveTemplateForm.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                        {
-                            if (!Document.Saved) Document.Save();
-
-                            //string documentsFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                            //string filename = _saveTemplateForm.TName.Text + ".docx";
-                            //else Document.SaveAs2(Path.Combine(documentsFolder, "Templates", filename));
-
-
-                            _saveTemplateForm.Dispose();
-                        }
-                        //_saveTemplateForm.dis.Show(new WindowInplementation(new IntPtr(Globals.ThisAddIn.Application.Windows[1].Hwnd)));
-                        _temp = new Template { TemplateID = Guid.NewGuid().ToString("D"), Name = _saveTemplateForm.TName.Text, Number = Convert.ToInt32(_saveTemplateForm.AutoDocs.Value), BookMarks = new List<BookMark> { new BookMark { BookMarkID = Guid.NewGuid().ToString("D"), BookmarkName = bookmarkName, BookMarkTypeID = bookMarkTypeId } }, Path = Document.FullName };
-                        _unitOfWork.TemplateRepository.Add(_temp);
+                        var bookm =  new BookMark { BookMarkID = Guid.NewGuid().ToString("D"), BookmarkName = bookmarkName, BookMarkTypeID = bookMarkTypeId, TemplateID = _temp.TemplateID };
+                        _unitOfWork.BookMarkRepository.Add(bookm);
                         _unitOfWork.Save();
-                        //else _unitOfWork.TemplateRepository.Add(new Template { TemplateID = Guid.NewGuid().ToString("D"), Name = _saveTemplateForm.TName.Text, Number = _saveTemplateForm.AutoDocs.Value, Path = Document.FullName });
-                        string xmlString = Encoding.UTF8.GetString(GetTemplateXML(_temp.TemplateID).ToArray());
-                        Document.CustomXMLParts.Add(xmlString);
                     }
                 } 
             }
@@ -125,11 +111,56 @@ namespace AutoDocx.Tools
             }
         }
 
+        public static void GoToBookmark(string BookMarkID, string AutoDocumentID)
+        {
+            BookmarkDataPopup.bookMark = ThisAddIn._unitOfWork.BookMarkRepository.FindBy(id => id.BookMarkID == BookMarkID);
+            
+            BookmarkDataPopup _bookmarkDataPopup = new BookmarkDataPopup();
+
+            _AutoDocumentID = AutoDocumentID;
+
+            _bookmarkDataPopup.Activated += _bookmarkDataPopup_Activated;
+            _bookmarkDataPopup.ShowDialog(); 
+            
+
+            
+            
+
+
+        }
+
+        private static void _bookmarkDataPopup_Activated(object sender, EventArgs e)
+        {
+            object fm = sender as System.Windows.Forms.Form;
+
+            BookmarkDataPopup _bookmarkDataPopup = (BookmarkDataPopup)fm;
+
+            foreach (System.Windows.Forms.Control control in _bookmarkDataPopup.flowLayoutPanel1.Controls)
+            {
+                if (control is System.Windows.Forms.Button && control.Name == _AutoDocumentID)
+                {
+                    control.Focus();
+                    _bookmarkDataPopup.ButtonClick(control, new EventArgs());
+                    _bookmarkDataPopup.Activated -= _bookmarkDataPopup_Activated;
+
+                }
+            }
+
+            _bookmarkDataPopup.Activated -= _bookmarkDataPopup_Activated;
+        }
+
 
         //http://stackoverflow.com/questions/161356/create-a-new-word-document-using-vsto
         public void CreateTemplatedDocuments(Microsoft.Office.Interop.Word.Document Document, ICollection<AutoDocument> data)
         {
-            //var temp = Globals.ThisAddIn.Application.Templates;
+            TemplateCustomXML tXML = ReadXML<TemplateCustomXML>(Document);
+            Template _temp = null;
+            if (tXML != null) _temp = _temp = ThisAddIn._document<Template>(tXML.TemplateID);//
+            foreach (Microsoft.Office.Core.CustomXMLPart xml in Document.CustomXMLParts.SelectByNamespace("TemplateCustomXML"))
+            {
+                xml.Delete();
+            }
+
 
             foreach (var i in data)
             {
@@ -145,21 +176,21 @@ namespace AutoDocx.Tools
 
 
 
-                string _myDocumentsFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                string _saveFolder = _temp.AutoDocumentsPath.IsNullOrEmpty() ? Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) : _temp.AutoDocumentsPath;
                 string filename = i.Name + ".docx";
 
                 //using (FileStream fs = new FileStream(Path.Combine(desktopFolder, "autogenerated", filename), ))
                 //{
                 //    if(fs.CanRead)
                 //}
-                if(!File.Exists(Path.Combine(_myDocumentsFolder, filename)))
+                if(!File.Exists(Path.Combine(_saveFolder, filename)))
                 {
-                    thisDoc.SaveAs2(Path.Combine(_myDocumentsFolder, filename));
+                    thisDoc.SaveAs2(Path.Combine(_saveFolder, filename));
 
                     if (Globals.ThisAddIn.AutoDocSavePDF.Checked)
                     {
                         thisDoc.ExportAsFixedFormat(
-                        Path.Combine(_myDocumentsFolder, (i.Name + ".pdf")),
+                        Path.Combine(_saveFolder, (i.Name + ".pdf")),
                         Word.WdExportFormat.wdExportFormatPDF,
                         OpenAfterExport: false);
                     }
@@ -170,14 +201,14 @@ namespace AutoDocx.Tools
                 {
                     for (int j = 1; j < 10; j++)
                     {
-                        if (!File.Exists(Path.Combine(_myDocumentsFolder, (i.Name + j + ".docx"))))
+                        if (!File.Exists(Path.Combine(_saveFolder, (i.Name + j + ".docx"))))
                         {
-                            thisDoc.SaveAs2(Path.Combine(_myDocumentsFolder, (i.Name + j + ".docx")));
+                            thisDoc.SaveAs2(Path.Combine(_saveFolder, (i.Name + j + ".docx")));
 
                             if (Globals.ThisAddIn.AutoDocSavePDF.Checked)
                             {
                                 thisDoc.ExportAsFixedFormat(
-                                Path.Combine(_myDocumentsFolder, (i.Name + j + ".pdf")),
+                                Path.Combine(_saveFolder, (i.Name + j + ".pdf")),
                                 Word.WdExportFormat.wdExportFormatPDF,
                                 OpenAfterExport: false);
                             }
@@ -274,6 +305,10 @@ namespace AutoDocx.Tools
             //memoryStream.Close();
             return memoryStream;
         }
+
+
+
+
 
         public T ReadXML<T>(Word.Document Document)
         {

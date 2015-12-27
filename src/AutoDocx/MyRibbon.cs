@@ -1,4 +1,7 @@
-﻿using System;
+﻿using AutoDocx.Tools;
+using System;
+using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -27,14 +30,11 @@ using Word = Microsoft.Office.Interop.Word;
 namespace AutoDocx
 {
     [ComVisible(true)]
-    public class MyRibbon : Office.IRibbonExtensibility
+    public partial class MyRibbon : Office.IRibbonExtensibility
     {
-        private Office.IRibbonUI ribbon;
+        public static Office.IRibbonUI ribbon;
 
-
-        public MyRibbon()
-        {
-        }
+        public MyRibbon(){}
 
         #region IRibbonExtensibility Members
 
@@ -42,109 +42,10 @@ namespace AutoDocx
         {
             return GetResourceText("AutoDocx.MyRibbon.xml");
         }
-
-        public void OnTextButton(Office.IRibbonControl control)
-        {
-            Word.Range currentRange = Globals.ThisAddIn.Application.Selection.Range;
-            currentRange.Text = "This text was added by the Ribbon.";
-        }
         
-        public void OnTableButton(Office.IRibbonControl control)
-        {
-           // System.Windows.Forms.MessageBox.Show("Button clicked ");
-            object missing = System.Type.Missing;
-            Word.Range currentRange = Globals.ThisAddIn.Application.Selection.Range;
-            Word.Table newTable = Globals.ThisAddIn.Application.ActiveDocument.Tables.Add(currentRange, 3, 4, ref missing, ref missing);
-
-            // Get all of the borders except for the diagonal borders.
-            Word.Border[] borders = new Word.Border[6];
-            borders[0] = newTable.Borders[Word.WdBorderType.wdBorderLeft];
-            borders[1] = newTable.Borders[Word.WdBorderType.wdBorderRight];
-            borders[2] = newTable.Borders[Word.WdBorderType.wdBorderTop];
-            borders[3] = newTable.Borders[Word.WdBorderType.wdBorderBottom];
-            borders[4] = newTable.Borders[Word.WdBorderType.wdBorderHorizontal];
-            borders[5] = newTable.Borders[Word.WdBorderType.wdBorderVertical];
-
-            // Format each of the borders.
-            foreach (Word.Border border in borders)
-            {
-                border.LineStyle = Word.WdLineStyle.wdLineStyleSingle;
-                border.Color = Word.WdColor.wdColorAutomatic;
-            }
-        }
-        
-
-        public void ToggleButtonOnAction(Office.IRibbonControl control, bool pressed)
-        {
-            //System.Windows.Forms.MessageBox.Show("ToggleButton was switched " + (pressed ? "on" : "off"));
-            //if (control.Id == "toggleButton1")
-            //{
-            //    System.Windows.Forms.MessageBox.Show("Button clicked 2");
-            //}
-            
-            Globals.ThisAddIn.TaskPane.Visible = pressed ? true : false;
-        }
-
-        public void SaveAsPDF(Office.IRibbonControl control)
-        {
-            string desktopFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            string filename = "report.pdf";
-
-            Globals.ThisAddIn.Application.ActiveDocument.ExportAsFixedFormat(
-                Path.Combine(desktopFolder, filename),
-                Word.WdExportFormat.wdExportFormatPDF,
-                OpenAfterExport : true);
-        }
-        
-
-        public void makeVariable(Office.IRibbonControl control, bool pressed)
-        {
-            Globals.ThisAddIn.ToggleControl.Checked = pressed;
-            
-
-            Globals.ThisAddIn.ToggleRichTextControlOnDocument();
-        }
-
-        public void dialogForm(Office.IRibbonControl control)
-        {
-           //addbuilt in dialog box
-            ControlForm form = new ControlForm();
-            form.Show();
-        }
-
-        public void AutoDocSavePDF(Office.IRibbonControl control, bool pressed)
-        {
-            Globals.ThisAddIn.AutoDocSavePDF.Checked = pressed;
-        }
-
-        public void RefreshData(Office.IRibbonControl control)
-        {
-
-            //System.Windows.Forms.SaveFileDialog save = new System.Windows.Forms.SaveFileDialog();
-            //save.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            //save.RestoreDirectory = true;
-
-            System.Windows.Forms.FolderBrowserDialog fbd = new System.Windows.Forms.FolderBrowserDialog();
-            if(fbd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                System.Windows.Forms.MessageBox.Show(fbd.SelectedPath);
-            }
-
-
-        }
-
         #endregion
 
-        #region Ribbon Callbacks
-        //Create callback methods here. For more information about adding callback methods, visit http://go.microsoft.com/fwlink/?LinkID=271226
-
-        public void Ribbon_Load(Office.IRibbonUI ribbonUI)
-        {
-            this.ribbon = ribbonUI;
-            
-        }
-
-        #endregion
+        
 
         #region Helpers
 
@@ -167,8 +68,6 @@ namespace AutoDocx
             }
             return null;
         }
-
-
         
         #endregion
     }

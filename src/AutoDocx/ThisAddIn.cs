@@ -84,15 +84,87 @@ namespace AutoDocx
 
 
 
+        public static Template SaveTemplate()
+        {
+            Methods _methods = new Methods();
+            TemplateCustomXML tXML = _methods.ReadXML<TemplateCustomXML>(Globals.ThisAddIn.Application.ActiveDocument);
+            Template _temp = null;
+            if (tXML != null || (ThisAddIn._document<Template>(tXML.TemplateID) != null))
+            {
+                System.Windows.Forms.MessageBox.Show("Template Already Saved...");
+                return null;
+            } 
+
+
+
+            ///////////////////////////////////////////////////
+            
+
+            SaveTemplateForm _saveTemplateForm = new SaveTemplateForm();
+
+            if (_saveTemplateForm.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                if (!Globals.ThisAddIn.Application.ActiveDocument.Saved) Globals.ThisAddIn.Application.ActiveDocument.Save();
+
+                //string documentsFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                //string filename = _saveTemplateForm.TName.Text + ".docx";
+                //else Document.SaveAs2(Path.Combine(documentsFolder, "Templates", filename));
+
+
+                _saveTemplateForm.Dispose();
+            }
+            //_saveTemplateForm.dis.Show(new WindowInplementation(new IntPtr(Globals.ThisAddIn.Application.Windows[1].Hwnd)));
+            _temp = new Template { TemplateID = Guid.NewGuid().ToString("D"), Name = _saveTemplateForm.TName.Text, Number = Convert.ToInt32(_saveTemplateForm.AutoDocs.Value), TemplatePath = Globals.ThisAddIn.Application.ActiveDocument.FullName };
+            _unitOfWork.TemplateRepository.Add(_temp);
+            _unitOfWork.Save();
+            //else _unitOfWork.TemplateRepository.Add(new Template { TemplateID = Guid.NewGuid().ToString("D"), Name = _saveTemplateForm.TName.Text, Number = _saveTemplateForm.AutoDocs.Value, Path = Document.FullName });
+            string xmlString = System.Text.Encoding.UTF8.GetString(_methods.GetTemplateXML(_temp.TemplateID).ToArray());
+            Globals.ThisAddIn.Application.ActiveDocument.CustomXMLParts.Add(xmlString);
+
+
+            return _temp;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
 
             _unitOfWork.Seed();
 
 
+            DisplayTaskPane();
 
 
 
+
+            //this.Application.DocumentBeforeSave += new Word.ApplicationEvents4_DocumentBeforeSaveEventHandler(Application_DocumentBeforeSave);
+            this.Application.DocumentChange += new Word.ApplicationEvents4_DocumentChangeEventHandler(documentChangeEvent);
+            this.Application.DocumentOpen += new Word.ApplicationEvents4_DocumentOpenEventHandler(documentOpenEvent);
+            //this.Application.WindowActivate += new Word.ApplicationEvents4_WindowActivateEventHandler(Application_WindowActivate);
+            //this.Application.DocumentBeforeClose += new Word.ApplicationEvents4_DocumentBeforeCloseEventHandler(DocumentBeforeClose);
+        }
+
+
+
+        private void documentOpenEvent(Word.Document Doc)
+        {
+            MyRibbon.ribbon.ActivateTab("CustomTab");
+
+        }
+
+        private void DisplayTaskPane()
+        {
+          
 
 
             _userControlTaskPane = new UserControlTaskPane();
@@ -101,20 +173,13 @@ namespace AutoDocx
             myCustomTaskPane.Width = 500;
             //msoCTPDockPositionLeft = 0, msoCTPDockPositionTop = 1, msoCTPDockPositionRight = 2, msoCTPDockPositionBottom = 3,  soCTPDockPositionFloating = 4
             //myCustomTaskPane.DockPosition = Office.MsoCTPDockPosition.msoCTPDockPositionFloating;
-            myCustomTaskPane.Visible = true; // TaskPane.Visible;
+            myCustomTaskPane.Visible = true;
 
-            //this.Application.DocumentBeforeSave += new Word.ApplicationEvents4_DocumentBeforeSaveEventHandler(Application_DocumentBeforeSave);
-            this.Application.DocumentChange += new Word.ApplicationEvents4_DocumentChangeEventHandler(documentChangeEvent);
-            //this.Application.DocumentOpen += new Word.ApplicationEvents4_DocumentOpenEventHandler(documentOpenEvent);
+
+
+            
         }
 
-        
-
-        //public void documentOpenEvent(Word.Document doc)
-        //{
-        //    doc.Paragraphs[1].Range.InsertParagraphBefore();
-        //    doc.Paragraphs[1].Range.Text = "This text was added by using code.";
-        //}
 
         public void documentChangeEvent()
         {
@@ -156,94 +221,6 @@ namespace AutoDocx
         {
             //return Globals.Factory.GetRibbonFactory().CreateRibbonManager(new Microsoft.Office.Tools.Ribbon.IRibbonExtension[] { new MyRibbon() });
             return new MyRibbon();
-        }
-
-        //public static string GetContentControlValueByTag(string location, string tag)
-        //{
-        //    // Open the Word document specified by "location".
-        //    using (Word.ope theDoc = WordprocessingDocument.Open(location, true))
-        //    {
-        //        // Get the package part that holds the main document content.
-        //        MainDocumentPart mainPart = theDoc.MainDocumentPart;
-
-        //        // Find the content content control whose Tag value == tag.
-        //        // In this case, the tag value is "idPolicyNumber".
-        //        SdtRun policyNumberCC = mainPart.Document.Body.Descendants<SdtRun>().Where(r => r.SdtProperties.GetFirstChild<Tag>().Val == tag).SingleOrDefault();
-
-        //        // Find the <sdtContent> element of the content control.
-        //        SdtContentRun contentRun = policyNumberCC.GetFirstChild<SdtContentRun>();
-
-        //        // Get the string inside the content control.
-        //        string policyNumber = contentRun.GetFirstChild<Run>().GetFirstChild<Text>().InnerText;
-
-        //        return policyNumber;
-        //    }
-        //}
-
-        internal void ToggleRichTextControlOnDocument()
-        {
-            
-            Document vstoDocument = Globals.Factory.GetVstoObject(this.Application.ActiveDocument);
-            Document extendedDocument = Globals.Factory.GetVstoObject(this.Application.ActiveDocument);
-
-
-            string name = "MyRichTextBoxControl";
-
-            if (ToggleControl.Checked)
-            {
-                Word.Selection selection = this.Application.Selection;
-                if (selection != null && selection.Range != null)
-                {
-                    //richTextControl = vstoDocument.Controls.AddRichTextContentControl(selection.Range, name);
-                    //richTextControl.Tag = "richTextControlTag";
-                    Bookmark firstParagraph = extendedDocument.Controls.AddBookmark(selection.Range, "bookmarkName");
-                    
-                }
-            }
-            else
-            {
-                vstoDocument.Controls.Remove(name);
-            }
-        }
-
-
-
-        void ShowTaskPane(Microsoft.Office.Interop.Word.ContentControl ContentControl)
-
-        {
-            foreach (Microsoft.Office.Tools.CustomTaskPane taskPane in this.CustomTaskPanes)
-
-            {
-                
-                if ((taskPane != null) && (taskPane.Control is UserControlTaskPane))
-
-                {
-                    taskPane.Visible = true;
-
-                }
-
-            }
-
-        }
-
-        void HideTaskPane(Microsoft.Office.Interop.Word.ContentControl ContentControl, ref bool Cancel)
-
-        {
-
-            foreach (Microsoft.Office.Tools.CustomTaskPane taskPane in this.CustomTaskPanes)
-
-            {
-
-                if ((taskPane != null) && (taskPane.Control is UserControlTaskPane))
-
-                {
-
-                    taskPane.Visible = false;
-
-                }
-
-            }
-
         }
 
 
