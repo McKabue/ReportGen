@@ -279,31 +279,6 @@
     <EmbeddedResource Include="wordpress-sleep-compress.gif" />
     <EmbeddedResource Include="google.jpg" />
     <EmbeddedResource Include="dev.jpg" />
-    <Content Include="Help\Content\durandal.css" />
-    <Content Include="Help\Content\images\icon.png" />
-    <Content Include="Help\Content\images\ios-startup-image-landscape.png" />
-    <Content Include="Help\Content\images\ios-startup-image-portrait.png" />
-    <Content Include="Help\Scripts\almond-custom.js" />
-    <Content Include="Help\Scripts\durandal\activator.js" />
-    <Content Include="Help\Scripts\durandal\app.js" />
-    <Content Include="Help\Scripts\durandal\binder.js" />
-    <Content Include="Help\Scripts\durandal\composition.js" />
-    <Content Include="Help\Scripts\durandal\events.js" />
-    <Content Include="Help\Scripts\durandal\plugins\dialog.js" />
-    <Content Include="Help\Scripts\durandal\plugins\history.js" />
-    <Content Include="Help\Scripts\durandal\plugins\http.js" />
-    <Content Include="Help\Scripts\durandal\plugins\observable.js" />
-    <Content Include="Help\Scripts\durandal\plugins\router.js" />
-    <Content Include="Help\Scripts\durandal\plugins\serializer.js" />
-    <Content Include="Help\Scripts\durandal\plugins\widget.js" />
-    <Content Include="Help\Scripts\durandal\system.js" />
-    <Content Include="Help\Scripts\durandal\viewEngine.js" />
-    <Content Include="Help\Scripts\durandal\viewLocator.js" />
-    <Content Include="Help\Scripts\knockout-3.3.0.debug.js" />
-    <Content Include="Help\Scripts\knockout-3.3.0.js" />
-    <Content Include="Help\Scripts\r.js" />
-    <Content Include="Help\Scripts\require.js" />
-    <Content Include="Help\Scripts\text.js" />
     <EmbeddedResource Include="BookmarkDataPopup.resx">
       <DependentUpon>BookmarkDataPopup.cs</DependentUpon>
     </EmbeddedResource>
@@ -339,17 +314,6 @@
     <None Include="AutoDocx_1_TemporaryKey.pfx" />
     <None Include="AutoDocx_TemporaryKey.pfx" />
     <Compile Include="Callbacks.MyRibbon.cs" />
-    <None Include="Help\Content\bootstrap-theme.css.map" />
-    <None Include="Help\Content\bootstrap.css.map" />
-    <Content Include="Help\fonts\fontawesome-webfont.eot" />
-    <Content Include="Help\fonts\fontawesome-webfont.ttf" />
-    <Content Include="Help\fonts\fontawesome-webfont.woff" />
-    <Content Include="Help\fonts\fontawesome-webfont.woff2" />
-    <Content Include="Help\fonts\FontAwesome.otf" />
-    <Content Include="Help\fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Help\fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="Help\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="Help\fonts\glyphicons-halflings-regular.woff2" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\AutoDocx.Tools.Models.BookMark.datasource" />
     <None Include="Properties\Settings.settings">
@@ -364,7 +328,6 @@
     <Compile Include="ThisAddIn.cs">
       <SubType>Code</SubType>
     </Compile>
-    <None Include="Help\Scripts\jquery-2.1.4.min.map" />
     <None Include="ThisAddIn.Designer.xml">
       <DependentUpon>ThisAddIn.cs</DependentUpon>
     </None>
@@ -379,23 +342,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Help\Content\bootstrap-theme.css" />
-    <Content Include="Help\Content\bootstrap-theme.min.css" />
-    <Content Include="Help\Content\bootstrap.css" />
-    <Content Include="Help\Content\bootstrap.min.css" />
-    <Content Include="Help\Content\font-awesome.css" />
-    <Content Include="Help\Content\font-awesome.min.css" />
-    <Content Include="Help\fonts\fontawesome-webfont.svg" />
-    <Content Include="Help\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Help\HELP.html" />
-    <Content Include="Help\Scripts\bootstrap.js" />
-    <Content Include="Help\Scripts\bootstrap.min.js" />
-    <Content Include="Help\Scripts\jquery-2.1.4.intellisense.js" />
-    <Content Include="Help\Scripts\jquery-2.1.4.js" />
-    <Content Include="Help\Scripts\jquery-2.1.4.min.js" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Help\app\mvvm\" />
+    <Folder Include="app\mvvm\" />
     <Folder Include="tests\" />
   </ItemGroup>
   <PropertyGroup>

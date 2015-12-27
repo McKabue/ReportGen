@@ -18,7 +18,7 @@
           <button imageMso="Folder" id="Button1" label="AutoDocs Save Folder" size="large" onAction="AutoDocSaveFolder" />
         </group>
         <group id="savetemplate" label="Save Template">
-          <button imageMso="SaveAs" id="savetemplateButton" label="Save This Template" size="large" onAction="SaveTemplate" />
+          <button imageMso="FileSave" id="savetemplateButton" label="Save This Template" size="large" onAction="SaveTemplate" />
         </group>
         <group id="Author" label="Contact">
                <gallery id="gallery1" 
