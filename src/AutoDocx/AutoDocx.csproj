@@ -248,6 +248,7 @@
     </Compile>
     <Compile Include="Tools\DAL\DatabaseContext.cs" />
     <Compile Include="Tools\DAL\UnitOfWork.cs" />
+    <Compile Include="Tools\EmailViewModel.cs" />
     <Compile Include="Tools\Extentions.cs" />
     <Compile Include="Tools\AutoDocumentCustomXML.cs" />
     <Compile Include="Tools\Methods.cs" />

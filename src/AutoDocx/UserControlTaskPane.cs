@@ -3,11 +3,8 @@ using System.Linq;
 using System.Windows.Forms;
 using AutoDocx.Tools.DAL;
 using AutoDocx.Tools;
-using AutoDocx.Tools.Security;
-using System.Diagnostics;
-using System.Drawing;
 using Word = Microsoft.Office.Interop.Word;
-using AutoDocx.Tools;
+using System.IO;
 
 namespace AutoDocx
 {
@@ -157,10 +154,7 @@ namespace AutoDocx
             //}
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            //Process.Start(ThisAddIn.appRootDir + @"\Help\HELP.html");
-        }
+        
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
@@ -174,7 +168,32 @@ namespace AutoDocx
             }
         }
 
-        
+        private void emailSend_Click(object sender, EventArgs e)
+        {
+            if (emailFrom.Text.IsNullOrEmpty()) { MessageBox.Show("Add your Email"); return; }
+            if (emailTitle.Text.IsNullOrEmpty()) { MessageBox.Show("Add a Title"); return; }
+            if (emailSubject.Text.IsNullOrEmpty()) { MessageBox.Show("Select A subject in the dropdown"); return; }
+            if (emailBody.Text.IsNullOrEmpty()) { MessageBox.Show("You Need to write something"); return; }
+
+
+            string subject = String.Format("{0} => [{1}]", emailSubject.Text, emailTitle.Text); 
+
+            if (Methods.SendEmail(new EmailViewModel { From = emailFrom.Text, Subject = subject, Body = emailBody.Text, Attachment = textBox_Attachment.Text }))
+            {
+                MessageBox.Show("Email Sent Successfully...");
+            }
+        }
+
+        private void AddAttachment_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dlg = new OpenFileDialog();
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                textBox_Attachment.Text = dlg.FileName.ToString();
+            }
+        }
+
+
 
 
 

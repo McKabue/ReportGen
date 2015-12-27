@@ -39,7 +39,7 @@ namespace AutoDocx
 			switch (control.Id)
 			{
 			   case "gallery1" : strText = "Developer"; break;
-			   case "button1" : strText = "Go Online"; break;
+			   case "button1" : strText = "Product of Sitepoa Softwares"; break;
 			   default : strText = "Error"; break;
 			}
 			return strText;

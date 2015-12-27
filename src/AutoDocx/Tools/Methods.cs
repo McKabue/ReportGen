@@ -4,7 +4,10 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Text;
+using System.Windows.Forms;
 using System.Xml.Serialization;
 using Word = Microsoft.Office.Interop.Word;
 
@@ -343,6 +346,39 @@ namespace AutoDocx.Tools
         {
             System.Xml.XmlAttribute attr = e.Attr;
             System.Windows.Forms.MessageBox.Show("Unknown attribute " + attr.Name + "='" + attr.Value + "'");
+        }
+
+
+        public static bool SendEmail(EmailViewModel email)
+        {
+            try
+            {
+                SmtpClient client = new SmtpClient("smtp.gmail.com");
+                client.Port = 587;
+                client.EnableSsl = true;
+                client.Timeout = 100000;
+                client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                client.UseDefaultCredentials = false;
+                client.Credentials = new NetworkCredential("mckabue@gmail.com", "227445698k3333");
+                MailMessage msg = new MailMessage();
+                msg.To.Add("mckabue@gmail.com");
+                msg.From = new MailAddress(email.From);
+                msg.Subject = email.Subject;
+                msg.Body = email.Body;
+                if (!email.Attachment.IsNullOrEmpty() && File.Exists(email.Attachment))
+                {
+                    Attachment data = new Attachment(email.Attachment);
+                    msg.Attachments.Add(data);
+                }
+                client.Send(msg);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
         }
     }
 }

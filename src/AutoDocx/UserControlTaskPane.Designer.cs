@@ -41,20 +41,24 @@
             this.AutoGenerate = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.treeView1 = new System.Windows.Forms.TreeView();
-            this.Help = new System.Windows.Forms.TabPage();
+            this.Reviews = new System.Windows.Forms.TabPage();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.emailTitle = new System.Windows.Forms.TextBox();
+            this.emailSubject = new System.Windows.Forms.ComboBox();
+            this.emailBody = new System.Windows.Forms.RichTextBox();
+            this.emailSend = new System.Windows.Forms.Button();
+            this.AddAttachment = new System.Windows.Forms.Button();
+            this.textBox_Attachment = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.emailFrom = new System.Windows.Forms.TextBox();
             bookMarkTypeLabel = new System.Windows.Forms.Label();
             this.TaskPaneTabControl.SuspendLayout();
             this.Templating.SuspendLayout();
             this.Binding.SuspendLayout();
-            this.Help.SuspendLayout();
+            this.Reviews.SuspendLayout();
             this.SuspendLayout();
             // 
             // bookMarkTypeLabel
@@ -70,7 +74,7 @@
             // 
             this.TaskPaneTabControl.Controls.Add(this.Templating);
             this.TaskPaneTabControl.Controls.Add(this.Binding);
-            this.TaskPaneTabControl.Controls.Add(this.Help);
+            this.TaskPaneTabControl.Controls.Add(this.Reviews);
             this.TaskPaneTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TaskPaneTabControl.Location = new System.Drawing.Point(0, 0);
             this.TaskPaneTabControl.Name = "TaskPaneTabControl";
@@ -191,37 +195,41 @@
             this.treeView1.TabStop = false;
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             // 
-            // Help
+            // Reviews
             // 
-            this.Help.Controls.Add(this.label7);
-            this.Help.Controls.Add(this.label6);
-            this.Help.Controls.Add(this.label5);
-            this.Help.Controls.Add(this.label4);
-            this.Help.Controls.Add(this.textBox2);
-            this.Help.Controls.Add(this.comboBox1);
-            this.Help.Controls.Add(this.richTextBox2);
-            this.Help.Controls.Add(this.button1);
-            this.Help.Location = new System.Drawing.Point(4, 22);
-            this.Help.Name = "Help";
-            this.Help.Size = new System.Drawing.Size(421, 498);
-            this.Help.TabIndex = 2;
-            this.Help.Text = "Reviews";
-            this.Help.UseVisualStyleBackColor = true;
+            this.Reviews.AutoScroll = true;
+            this.Reviews.Controls.Add(this.label8);
+            this.Reviews.Controls.Add(this.emailFrom);
+            this.Reviews.Controls.Add(this.textBox_Attachment);
+            this.Reviews.Controls.Add(this.AddAttachment);
+            this.Reviews.Controls.Add(this.label7);
+            this.Reviews.Controls.Add(this.label6);
+            this.Reviews.Controls.Add(this.label5);
+            this.Reviews.Controls.Add(this.label4);
+            this.Reviews.Controls.Add(this.emailTitle);
+            this.Reviews.Controls.Add(this.emailSubject);
+            this.Reviews.Controls.Add(this.emailBody);
+            this.Reviews.Controls.Add(this.emailSend);
+            this.Reviews.Location = new System.Drawing.Point(4, 22);
+            this.Reviews.Name = "Reviews";
+            this.Reviews.Size = new System.Drawing.Size(421, 498);
+            this.Reviews.TabIndex = 2;
+            this.Reviews.Text = "Reviews";
+            this.Reviews.UseVisualStyleBackColor = true;
             // 
             // label7
             // 
             this.label7.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.Location = new System.Drawing.Point(3, 5);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(415, 86);
+            this.label7.Size = new System.Drawing.Size(415, 54);
             this.label7.TabIndex = 8;
-            this.label7.Text = "Are there Improvements or Features that you need to see added to this plugin? Fil" +
-    "l out your Recommedations in the input sections below and send an email...";
+            this.label7.Text = "Send Email to Request New Features, Improvements and Recommedations...";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(21, 187);
+            this.label6.Location = new System.Drawing.Point(21, 201);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(31, 13);
             this.label6.TabIndex = 7;
@@ -230,7 +238,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(21, 145);
+            this.label5.Location = new System.Drawing.Point(21, 154);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(43, 13);
             this.label5.TabIndex = 6;
@@ -239,49 +247,85 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(21, 103);
+            this.label4.Location = new System.Drawing.Point(21, 111);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(27, 13);
             this.label4.TabIndex = 5;
             this.label4.Text = "Title";
             // 
-            // textBox2
+            // emailTitle
             // 
-            this.textBox2.Location = new System.Drawing.Point(79, 103);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(339, 20);
-            this.textBox2.TabIndex = 4;
+            this.emailTitle.Location = new System.Drawing.Point(79, 111);
+            this.emailTitle.Name = "emailTitle";
+            this.emailTitle.Size = new System.Drawing.Size(343, 20);
+            this.emailTitle.TabIndex = 4;
             // 
-            // comboBox1
+            // emailSubject
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.emailSubject.FormattingEnabled = true;
+            this.emailSubject.Items.AddRange(new object[] {
             "New Feature",
             "Improvement",
             "Help",
             "Other"});
-            this.comboBox1.Location = new System.Drawing.Point(79, 145);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(140, 21);
-            this.comboBox1.TabIndex = 3;
+            this.emailSubject.Location = new System.Drawing.Point(79, 154);
+            this.emailSubject.Name = "emailSubject";
+            this.emailSubject.Size = new System.Drawing.Size(140, 21);
+            this.emailSubject.TabIndex = 3;
             // 
-            // richTextBox2
+            // emailBody
             // 
-            this.richTextBox2.Location = new System.Drawing.Point(79, 187);
-            this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(339, 250);
-            this.richTextBox2.TabIndex = 2;
-            this.richTextBox2.Text = "";
+            this.emailBody.Location = new System.Drawing.Point(79, 201);
+            this.emailBody.Name = "emailBody";
+            this.emailBody.Size = new System.Drawing.Size(343, 155);
+            this.emailBody.TabIndex = 2;
+            this.emailBody.Text = "";
             // 
-            // button1
+            // emailSend
             // 
-            this.button1.Location = new System.Drawing.Point(79, 452);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Send Email";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.emailSend.AutoSize = true;
+            this.emailSend.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.emailSend.Location = new System.Drawing.Point(293, 452);
+            this.emailSend.Name = "emailSend";
+            this.emailSend.Size = new System.Drawing.Size(125, 30);
+            this.emailSend.TabIndex = 1;
+            this.emailSend.Text = "Send Email...";
+            this.emailSend.UseVisualStyleBackColor = true;
+            this.emailSend.Click += new System.EventHandler(this.emailSend_Click);
+            // 
+            // AddAttachment
+            // 
+            this.AddAttachment.AutoSize = true;
+            this.AddAttachment.Location = new System.Drawing.Point(325, 406);
+            this.AddAttachment.Name = "AddAttachment";
+            this.AddAttachment.Size = new System.Drawing.Size(93, 23);
+            this.AddAttachment.TabIndex = 9;
+            this.AddAttachment.Text = "Add Attachment";
+            this.AddAttachment.UseVisualStyleBackColor = true;
+            this.AddAttachment.Click += new System.EventHandler(this.AddAttachment_Click);
+            // 
+            // textBox_Attachment
+            // 
+            this.textBox_Attachment.Location = new System.Drawing.Point(79, 377);
+            this.textBox_Attachment.Name = "textBox_Attachment";
+            this.textBox_Attachment.Size = new System.Drawing.Size(342, 20);
+            this.textBox_Attachment.TabIndex = 10;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(21, 71);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(30, 13);
+            this.label8.TabIndex = 12;
+            this.label8.Text = "From";
+            // 
+            // emailFrom
+            // 
+            this.emailFrom.Location = new System.Drawing.Point(79, 71);
+            this.emailFrom.Name = "emailFrom";
+            this.emailFrom.Size = new System.Drawing.Size(343, 20);
+            this.emailFrom.TabIndex = 11;
             // 
             // UserControlTaskPane
             // 
@@ -295,8 +339,8 @@
             this.Templating.PerformLayout();
             this.Binding.ResumeLayout(false);
             this.Binding.PerformLayout();
-            this.Help.ResumeLayout(false);
-            this.Help.PerformLayout();
+            this.Reviews.ResumeLayout(false);
+            this.Reviews.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -304,7 +348,7 @@
         #endregion
         private System.Windows.Forms.TabPage Templating;
         private System.Windows.Forms.TabPage Binding;
-        private System.Windows.Forms.TabPage Help;
+        private System.Windows.Forms.TabPage Reviews;
         public System.Windows.Forms.TabControl TaskPaneTabControl;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button SaveBookmark;
@@ -314,14 +358,18 @@
         private System.Windows.Forms.TreeView treeView1;
         public System.Windows.Forms.TextBox textBox1;
         public System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button emailSend;
         private System.Windows.Forms.Button AutoGenerate;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.RichTextBox richTextBox2;
         private System.Windows.Forms.Label label7;
+        public System.Windows.Forms.TextBox emailTitle;
+        public System.Windows.Forms.ComboBox emailSubject;
+        public System.Windows.Forms.RichTextBox emailBody;
+        private System.Windows.Forms.Button AddAttachment;
+        private System.Windows.Forms.TextBox textBox_Attachment;
+        private System.Windows.Forms.Label label8;
+        public System.Windows.Forms.TextBox emailFrom;
     }
 }
