@@ -38,10 +38,15 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.bookMarkTypeComboBox = new System.Windows.Forms.ComboBox();
             this.Binding = new System.Windows.Forms.TabPage();
+            this.SelectAllBindingAutodocuments = new System.Windows.Forms.CheckBox();
             this.AutoGenerate = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.Reviews = new System.Windows.Forms.TabPage();
+            this.label8 = new System.Windows.Forms.Label();
+            this.emailFrom = new System.Windows.Forms.TextBox();
+            this.textBox_Attachment = new System.Windows.Forms.TextBox();
+            this.AddAttachment = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -50,10 +55,7 @@
             this.emailSubject = new System.Windows.Forms.ComboBox();
             this.emailBody = new System.Windows.Forms.RichTextBox();
             this.emailSend = new System.Windows.Forms.Button();
-            this.AddAttachment = new System.Windows.Forms.Button();
-            this.textBox_Attachment = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.emailFrom = new System.Windows.Forms.TextBox();
+            this.BrowseAttachment = new System.Windows.Forms.Button();
             bookMarkTypeLabel = new System.Windows.Forms.Label();
             this.TaskPaneTabControl.SuspendLayout();
             this.Templating.SuspendLayout();
@@ -152,6 +154,7 @@
             // 
             // Binding
             // 
+            this.Binding.Controls.Add(this.SelectAllBindingAutodocuments);
             this.Binding.Controls.Add(this.AutoGenerate);
             this.Binding.Controls.Add(this.label3);
             this.Binding.Controls.Add(this.treeView1);
@@ -162,6 +165,17 @@
             this.Binding.TabIndex = 1;
             this.Binding.Text = "Binding";
             this.Binding.UseVisualStyleBackColor = true;
+            // 
+            // SelectAllBindingAutodocuments
+            // 
+            this.SelectAllBindingAutodocuments.AutoSize = true;
+            this.SelectAllBindingAutodocuments.Location = new System.Drawing.Point(13, 33);
+            this.SelectAllBindingAutodocuments.Name = "SelectAllBindingAutodocuments";
+            this.SelectAllBindingAutodocuments.Size = new System.Drawing.Size(147, 17);
+            this.SelectAllBindingAutodocuments.TabIndex = 25;
+            this.SelectAllBindingAutodocuments.Text = "Select All Autodocuments";
+            this.SelectAllBindingAutodocuments.UseVisualStyleBackColor = true;
+            this.SelectAllBindingAutodocuments.CheckedChanged += new System.EventHandler(this.SelectAllBindingAutodocuments_CheckedChanged);
             // 
             // AutoGenerate
             // 
@@ -188,9 +202,9 @@
             // treeView1
             // 
             this.treeView1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.treeView1.Location = new System.Drawing.Point(3, 25);
+            this.treeView1.Location = new System.Drawing.Point(3, 35);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(415, 470);
+            this.treeView1.Size = new System.Drawing.Size(415, 460);
             this.treeView1.TabIndex = 0;
             this.treeView1.TabStop = false;
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
@@ -198,6 +212,7 @@
             // Reviews
             // 
             this.Reviews.AutoScroll = true;
+            this.Reviews.Controls.Add(this.BrowseAttachment);
             this.Reviews.Controls.Add(this.label8);
             this.Reviews.Controls.Add(this.emailFrom);
             this.Reviews.Controls.Add(this.textBox_Attachment);
@@ -216,6 +231,40 @@
             this.Reviews.TabIndex = 2;
             this.Reviews.Text = "Reviews";
             this.Reviews.UseVisualStyleBackColor = true;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(21, 71);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(30, 13);
+            this.label8.TabIndex = 12;
+            this.label8.Text = "From";
+            // 
+            // emailFrom
+            // 
+            this.emailFrom.Location = new System.Drawing.Point(79, 71);
+            this.emailFrom.Name = "emailFrom";
+            this.emailFrom.Size = new System.Drawing.Size(343, 20);
+            this.emailFrom.TabIndex = 11;
+            // 
+            // textBox_Attachment
+            // 
+            this.textBox_Attachment.Location = new System.Drawing.Point(79, 377);
+            this.textBox_Attachment.Name = "textBox_Attachment";
+            this.textBox_Attachment.Size = new System.Drawing.Size(281, 20);
+            this.textBox_Attachment.TabIndex = 10;
+            // 
+            // AddAttachment
+            // 
+            this.AddAttachment.AutoSize = true;
+            this.AddAttachment.Location = new System.Drawing.Point(325, 406);
+            this.AddAttachment.Name = "AddAttachment";
+            this.AddAttachment.Size = new System.Drawing.Size(93, 23);
+            this.AddAttachment.TabIndex = 9;
+            this.AddAttachment.Text = "Add Attachment";
+            this.AddAttachment.UseVisualStyleBackColor = true;
+            this.AddAttachment.Click += new System.EventHandler(this.AddAttachment_Click);
             // 
             // label7
             // 
@@ -293,39 +342,16 @@
             this.emailSend.UseVisualStyleBackColor = true;
             this.emailSend.Click += new System.EventHandler(this.emailSend_Click);
             // 
-            // AddAttachment
+            // BrowseAttachment
             // 
-            this.AddAttachment.AutoSize = true;
-            this.AddAttachment.Location = new System.Drawing.Point(325, 406);
-            this.AddAttachment.Name = "AddAttachment";
-            this.AddAttachment.Size = new System.Drawing.Size(93, 23);
-            this.AddAttachment.TabIndex = 9;
-            this.AddAttachment.Text = "Add Attachment";
-            this.AddAttachment.UseVisualStyleBackColor = true;
-            this.AddAttachment.Click += new System.EventHandler(this.AddAttachment_Click);
-            // 
-            // textBox_Attachment
-            // 
-            this.textBox_Attachment.Location = new System.Drawing.Point(79, 377);
-            this.textBox_Attachment.Name = "textBox_Attachment";
-            this.textBox_Attachment.Size = new System.Drawing.Size(342, 20);
-            this.textBox_Attachment.TabIndex = 10;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(21, 71);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(30, 13);
-            this.label8.TabIndex = 12;
-            this.label8.Text = "From";
-            // 
-            // emailFrom
-            // 
-            this.emailFrom.Location = new System.Drawing.Point(79, 71);
-            this.emailFrom.Name = "emailFrom";
-            this.emailFrom.Size = new System.Drawing.Size(343, 20);
-            this.emailFrom.TabIndex = 11;
+            this.BrowseAttachment.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BrowseAttachment.Location = new System.Drawing.Point(366, 375);
+            this.BrowseAttachment.Name = "BrowseAttachment";
+            this.BrowseAttachment.Size = new System.Drawing.Size(52, 23);
+            this.BrowseAttachment.TabIndex = 13;
+            this.BrowseAttachment.Text = "Browse";
+            this.BrowseAttachment.UseVisualStyleBackColor = true;
+            this.BrowseAttachment.Click += new System.EventHandler(this.BrowseAttachment_Click);
             // 
             // UserControlTaskPane
             // 
@@ -371,5 +397,7 @@
         private System.Windows.Forms.TextBox textBox_Attachment;
         private System.Windows.Forms.Label label8;
         public System.Windows.Forms.TextBox emailFrom;
+        private System.Windows.Forms.CheckBox SelectAllBindingAutodocuments;
+        private System.Windows.Forms.Button BrowseAttachment;
     }
 }

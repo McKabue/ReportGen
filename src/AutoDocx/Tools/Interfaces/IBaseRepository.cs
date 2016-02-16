@@ -13,6 +13,7 @@ namespace AutoDocx.Tools.Interfaces
         T FindBy(Expression<Func<T, bool>> findBy);
         T FindBy(Expression<Func<T, bool>> findBy, string includeProperties);
         List<T> GetAll();
+        List<T> SearchBy(Expression<Func<T, bool>> searchBy);
         List<T> SearchBy(Expression<Func<T, bool>> searchBy, string includeProperties);
         List<T> SearchBy(Expression<Func<T, bool>> searchBy, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy, int size);
         void Update(T entity);

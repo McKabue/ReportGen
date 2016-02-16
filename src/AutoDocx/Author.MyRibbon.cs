@@ -179,7 +179,7 @@ namespace AutoDocx
             string strTip;
             switch (control.Id)
             {
-                case "gallery1": strTip = "Click to open a gallery of choices."; break;
+                case "gallery1": strTip = "Contact tthe Developer"; break;
                 case "button1": strTip = "This is a screentip for the button."; break;
                 default: strTip = "There is a problem."; break;
             }

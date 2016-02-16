@@ -89,7 +89,7 @@ namespace AutoDocx
             Methods _methods = new Methods();
             TemplateCustomXML tXML = _methods.ReadXML<TemplateCustomXML>(Globals.ThisAddIn.Application.ActiveDocument);
             Template _temp = null;
-            if (tXML != null || (ThisAddIn._document<Template>(tXML.TemplateID) != null))
+            if (tXML != null)
             {
                 System.Windows.Forms.MessageBox.Show("Template Already Saved...");
                 return null;

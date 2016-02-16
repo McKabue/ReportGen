@@ -148,9 +148,17 @@ namespace AutoDocx
         {
             //if ((await Trial.CheckTrial()))
             //{
-                //var selectednodes = treeView1.Nodes.Descendants().Where(n => n.Checked).Select(n => n.Text);
-                var data = _unitOfWork.AutoDocumentRepository.GetAll().ToList();
-                _extentions.CreateTemplatedDocuments(Globals.ThisAddIn.Application.ActiveDocument, data); 
+
+            var selectednodes = treeView1.Nodes.Descendants().Where(n => n.Checked).Select(n => n.Name);
+            if (!selectednodes.IsNullOrEmpty())
+            {
+                var data = _unitOfWork.AutoDocumentRepository.SearchBy(id => selectednodes.Contains(id.AutoDocumentID));
+                _extentions.CreateTemplatedDocuments(Globals.ThisAddIn.Application.ActiveDocument, data);  
+            }
+            else
+            {
+                MessageBox.Show("You Have not selected any Autodocument...");
+            }
             //}
         }
 
@@ -168,7 +176,7 @@ namespace AutoDocx
             }
         }
 
-        private void emailSend_Click(object sender, EventArgs e)
+        private async void emailSend_Click(object sender, EventArgs e)
         {
             if (emailFrom.Text.IsNullOrEmpty()) { MessageBox.Show("Add your Email"); return; }
             if (emailTitle.Text.IsNullOrEmpty()) { MessageBox.Show("Add a Title"); return; }
@@ -176,15 +184,30 @@ namespace AutoDocx
             if (emailBody.Text.IsNullOrEmpty()) { MessageBox.Show("You Need to write something"); return; }
 
 
-            string subject = String.Format("{0} => [{1}]", emailSubject.Text, emailTitle.Text); 
+            string subject = String.Format("{0} => [{1}]", emailSubject.Text, emailTitle.Text);
 
-            if (Methods.SendEmail(new EmailViewModel { From = emailFrom.Text, Subject = subject, Body = emailBody.Text, Attachment = textBox_Attachment.Text }))
+            try
             {
-                MessageBox.Show("Email Sent Successfully...");
+                await Methods.SendEmail(new EmailViewModel { From = emailFrom.Text, Subject = subject, Body = emailBody.Text, Attachment = textBox_Attachment.Text });
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show(Ex.Message);
             }
         }
 
         private void AddAttachment_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void SelectAllBindingAutodocuments_CheckedChanged(object sender, EventArgs e)
+        {
+
+            treeView1.Nodes.Descendants().Where(n => n.Level == 0).ForEach(node => { node.Checked = (sender as CheckBox).Checked; });
+        }
+
+        private void BrowseAttachment_Click(object sender, EventArgs e)
         {
             OpenFileDialog dlg = new OpenFileDialog();
             if (dlg.ShowDialog() == DialogResult.OK)

@@ -1,20 +1,44 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoDocx", "AutoDocx\AutoDocx.csproj", "{DC7A35B5-8FCA-4036-94AF-73FDCFB6C4B2}"
 EndProject
+Project("{6141683F-8A12-4E36-9623-2EB02B2C2303}") = "AutoDocxSetup", "AutoDocxSetup\AutoDocxSetup.isproj", "{D18E9A58-A880-46F4-A12D-6FF0FB8E00B5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{DC7A35B5-8FCA-4036-94AF-73FDCFB6C4B2} = {DC7A35B5-8FCA-4036-94AF-73FDCFB6C4B2}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		CD_ROM|Any CPU = CD_ROM|Any CPU
 		Debug|Any CPU = Debug|Any CPU
+		DVD-5|Any CPU = DVD-5|Any CPU
 		Release|Any CPU = Release|Any CPU
+		SingleImage|Any CPU = SingleImage|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DC7A35B5-8FCA-4036-94AF-73FDCFB6C4B2}.CD_ROM|Any CPU.ActiveCfg = Release|Any CPU
+		{DC7A35B5-8FCA-4036-94AF-73FDCFB6C4B2}.CD_ROM|Any CPU.Build.0 = Release|Any CPU
 		{DC7A35B5-8FCA-4036-94AF-73FDCFB6C4B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DC7A35B5-8FCA-4036-94AF-73FDCFB6C4B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC7A35B5-8FCA-4036-94AF-73FDCFB6C4B2}.DVD-5|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC7A35B5-8FCA-4036-94AF-73FDCFB6C4B2}.DVD-5|Any CPU.Build.0 = Debug|Any CPU
 		{DC7A35B5-8FCA-4036-94AF-73FDCFB6C4B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC7A35B5-8FCA-4036-94AF-73FDCFB6C4B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC7A35B5-8FCA-4036-94AF-73FDCFB6C4B2}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
+		{DC7A35B5-8FCA-4036-94AF-73FDCFB6C4B2}.SingleImage|Any CPU.Build.0 = Release|Any CPU
+		{D18E9A58-A880-46F4-A12D-6FF0FB8E00B5}.CD_ROM|Any CPU.ActiveCfg = CD_ROM
+		{D18E9A58-A880-46F4-A12D-6FF0FB8E00B5}.CD_ROM|Any CPU.Build.0 = CD_ROM
+		{D18E9A58-A880-46F4-A12D-6FF0FB8E00B5}.Debug|Any CPU.ActiveCfg = SingleImage
+		{D18E9A58-A880-46F4-A12D-6FF0FB8E00B5}.Debug|Any CPU.Build.0 = SingleImage
+		{D18E9A58-A880-46F4-A12D-6FF0FB8E00B5}.DVD-5|Any CPU.ActiveCfg = DVD-5
+		{D18E9A58-A880-46F4-A12D-6FF0FB8E00B5}.DVD-5|Any CPU.Build.0 = DVD-5
+		{D18E9A58-A880-46F4-A12D-6FF0FB8E00B5}.Release|Any CPU.ActiveCfg = SingleImage
+		{D18E9A58-A880-46F4-A12D-6FF0FB8E00B5}.Release|Any CPU.Build.0 = SingleImage
+		{D18E9A58-A880-46F4-A12D-6FF0FB8E00B5}.SingleImage|Any CPU.ActiveCfg = SingleImage
+		{D18E9A58-A880-46F4-A12D-6FF0FB8E00B5}.SingleImage|Any CPU.Build.0 = SingleImage
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

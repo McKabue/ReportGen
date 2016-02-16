@@ -32,6 +32,10 @@ namespace AutoDocx.Tools.Repositories
             return _ctx.Set<T>().ToList();
         }
 
+        public virtual List<T> SearchBy(Expression<Func<T, bool>> searchBy)
+        {
+            return _ctx.Set<T>().Where(searchBy).ToList();
+        }
 
         public virtual List<T> SearchBy(Expression<Func<T, bool>> searchBy, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy, int size)
         {
@@ -67,7 +71,7 @@ namespace AutoDocx.Tools.Repositories
 
         public virtual T FindBy(Expression<Func<T, bool>> findBy)
         {
-            T result = _ctx.Set<T>().Where(findBy).SingleOrDefault();
+            T result = _ctx.Set<T>().Where(findBy).FirstOrDefault();
             return result;
         }
 

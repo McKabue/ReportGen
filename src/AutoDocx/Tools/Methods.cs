@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Serialization;
 using Word = Microsoft.Office.Interop.Word;
@@ -28,12 +29,12 @@ namespace AutoDocx.Tools
                 Document.Bookmarks[bookmarkName].Delete();
                 range.Text = text;
                 range.Font.Shading.BackgroundPatternColor = Word.WdColor.wdColorDarkGreen;
-                
-                
+
+
 
                 // replace bookmark
                 Document.Bookmarks.Add(bookmarkName, range);
-                
+
 
 
             }
@@ -76,11 +77,11 @@ namespace AutoDocx.Tools
                     {
                         _temp = ThisAddIn.SaveTemplate();
 
-                        var bookm =  new BookMark { BookMarkID = Guid.NewGuid().ToString("D"), BookmarkName = bookmarkName, BookMarkTypeID = bookMarkTypeId, TemplateID = _temp.TemplateID };
+                        var bookm = new BookMark { BookMarkID = Guid.NewGuid().ToString("D"), BookmarkName = bookmarkName, BookMarkTypeID = bookMarkTypeId, TemplateID = _temp.TemplateID };
                         _unitOfWork.BookMarkRepository.Add(bookm);
                         _unitOfWork.Save();
                     }
-                } 
+                }
             }
             if (!Document.Saved) Document.Save();
             _unitOfWork.Save();
@@ -114,20 +115,22 @@ namespace AutoDocx.Tools
             }
         }
 
+
+
         public static void GoToBookmark(string BookMarkID, string AutoDocumentID)
         {
             BookmarkDataPopup.bookMark = ThisAddIn._unitOfWork.BookMarkRepository.FindBy(id => id.BookMarkID == BookMarkID);
-            
+
             BookmarkDataPopup _bookmarkDataPopup = new BookmarkDataPopup();
 
             _AutoDocumentID = AutoDocumentID;
 
-            _bookmarkDataPopup.Activated += _bookmarkDataPopup_Activated;
-            _bookmarkDataPopup.ShowDialog(); 
-            
+            _bookmarkDataPopup.Activated += new EventHandler(_bookmarkDataPopup_Activated);
+            _bookmarkDataPopup.ShowDialog();
 
-            
-            
+
+
+
 
 
         }
@@ -186,7 +189,7 @@ namespace AutoDocx.Tools
                 //{
                 //    if(fs.CanRead)
                 //}
-                if(!File.Exists(Path.Combine(_saveFolder, filename)))
+                if (!File.Exists(Path.Combine(_saveFolder, filename)))
                 {
                     thisDoc.SaveAs2(Path.Combine(_saveFolder, filename));
 
@@ -246,7 +249,7 @@ namespace AutoDocx.Tools
 
                 foreach (Word.Bookmark bmInDoc in doc.Bookmarks)
                 {
-                    if(bmInDoc.Name == _bm.BookmarkName)
+                    if (bmInDoc.Name == _bm.BookmarkName)
                     {
                         var range = doc.Bookmarks[bmInDoc].Range;
                         doc.Bookmarks[bmInDoc].Delete();
@@ -256,8 +259,8 @@ namespace AutoDocx.Tools
                 }
                 //string b = bm.Name.ToString();
 
-                
-                
+
+
             }
 
 
@@ -274,7 +277,7 @@ namespace AutoDocx.Tools
         public MemoryStream GetAutoDocumentXML(string AutoDocumentID)
         {
             XmlSerializer serializer = new XmlSerializer(typeof(AutoDocumentCustomXML));
-            
+
             MemoryStream memoryStream = new MemoryStream();
 
             AutoDocument doc = _unitOfWork.AutoDocumentRepository.FindBy(id => id.AutoDocumentID == AutoDocumentID);
@@ -293,7 +296,7 @@ namespace AutoDocx.Tools
         public MemoryStream GetTemplateXML(string TemplateID)
         {
             XmlSerializer serializer = new XmlSerializer(typeof(TemplateCustomXML));
-            
+
             MemoryStream memoryStream = new MemoryStream();
 
             Template doc = _unitOfWork.TemplateRepository.FindBy(id => id.TemplateID == TemplateID);
@@ -329,9 +332,9 @@ namespace AutoDocx.Tools
             T obj = default(T);
 
             if (x.IsNullOrEmpty()) return obj;
-            
+
             MemoryStream memoryStream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(x));
-            
+
 
             obj = (T)serializer.Deserialize(memoryStream);
             return obj;
@@ -349,36 +352,53 @@ namespace AutoDocx.Tools
         }
 
 
-        public static bool SendEmail(EmailViewModel email)
+        public static Task SendEmail(EmailViewModel email)
         {
-            try
-            {
-                SmtpClient client = new SmtpClient("smtp.gmail.com");
-                client.Port = 587;
-                client.EnableSsl = true;
-                client.Timeout = 100000;
-                client.DeliveryMethod = SmtpDeliveryMethod.Network;
-                client.UseDefaultCredentials = false;
-                client.Credentials = new NetworkCredential("mckabue@gmail.com", "227445698k3333");
-                MailMessage msg = new MailMessage();
-                msg.To.Add("mckabue@gmail.com");
-                msg.From = new MailAddress(email.From);
-                msg.Subject = email.Subject;
-                msg.Body = email.Body;
-                if (!email.Attachment.IsNullOrEmpty() && File.Exists(email.Attachment))
-                {
-                    Attachment data = new Attachment(email.Attachment);
-                    msg.Attachments.Add(data);
-                }
-                client.Send(msg);
+            SmtpClient client = new SmtpClient("smtp.gmail.com");
 
-                return true;
-            }
-            catch (Exception ex)
+            client.Port = 587;
+            client.EnableSsl = true;
+            client.Timeout = 100000;
+            client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            client.UseDefaultCredentials = false;
+            client.Credentials = new NetworkCredential("mswordautodocx@gmail.com", "mswordautodocx2013");
+            MailMessage msg = new MailMessage();
+            msg.To.Add("mckabue@gmail.com");
+            msg.To.Add("mswordautodocx@gmail.com");
+            msg.From = new MailAddress(email.From);
+            msg.Subject = email.Subject;
+            msg.Body = email.Body;
+            if (!email.Attachment.IsNullOrEmpty() && File.Exists(email.Attachment))
             {
-                MessageBox.Show(ex.Message);
-                return false;
+                Attachment data = new Attachment(email.Attachment);
+                msg.Attachments.Add(data);
             }
+
+            client.SendCompleted += new SendCompletedEventHandler(Client_SendCompleted);
+
+
+            client.SendAsync(msg, "AutoDocxEmails");
+
+            return Task.FromResult<object>(null);
+        }
+
+
+        private static void Client_SendCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
+        {
+            if (e.Cancelled)
+            {
+                MessageBox.Show("Email Sending was cancelled...");
+            }
+            if (e.Error != null)
+            {
+                MessageBox.Show(e.Error.Message);
+            }
+            else
+            {
+                MessageBox.Show("Email Sent Successfully...");
+            }
+
+            (sender as SmtpClient).Dispose();//.SendCompleted -= Client_SendCompleted;
         }
     }
 }

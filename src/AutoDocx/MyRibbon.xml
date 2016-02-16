@@ -26,7 +26,7 @@
                   rows="2"
                   getEnabled="GetEnabled" 
                   getScreentip="GetScreenTip" 
-                  supertip="This is the super tip." 
+                  supertip="mckabue@gmail.com" 
                   getKeytip="GetKeyTip" 
                   getShowImage="GetShowImage" 
                   getShowLabel="GetShowLabel"
@@ -37,9 +37,7 @@
                   getItemHeight="GetItemHeight" 
                   getItemWidth="GetItemWidth" 
                   getItemImage="GetItemImage" 
-                  getItemLabel="GetItemLabel" 
-                  getItemScreentip="GetItemScreenTip" 
-                  getItemSupertip="GetItemSuperTip"  
+                  getItemLabel="GetItemLabel"  
                   onAction="galleryOnAction" >
                      <item id="item1" />
                      <item id="item2" />
